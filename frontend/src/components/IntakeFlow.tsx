@@ -220,7 +220,7 @@ export const IntakeFlow: React.FC<IntakeFlowProps> = ({ embedded = false }) => {
             <div className="relative group/carousel">
                 <div
                     ref={scrollContainerRef}
-                    className="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory scrollbar-hide px-1"
+                    className="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory scrollbar-hide px-6 md:px-1"
                     style={{ scrollBehavior: 'smooth' }}
                 >
                     {THERAPISTS.map((therapist) => (
