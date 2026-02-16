@@ -85,15 +85,20 @@ export const IntakeFlow: React.FC<IntakeFlowProps> = ({ embedded = false }) => {
 
     const scrollContainerRef = React.useRef<HTMLDivElement>(null);
 
+    const getScrollAmount = () => {
+        const isDesktop = window.innerWidth >= 768; // Tailwind md breakpoint
+        return isDesktop ? 424 : 324; // Card width + gap-6 (24px)
+    };
+
     const scrollLeft = () => {
         if (scrollContainerRef.current) {
-            scrollContainerRef.current.scrollBy({ left: -280, behavior: 'smooth' });
+            scrollContainerRef.current.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
         }
     };
 
     const scrollRight = () => {
         if (scrollContainerRef.current) {
-            scrollContainerRef.current.scrollBy({ left: 280, behavior: 'smooth' });
+            scrollContainerRef.current.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
         }
     };
 
