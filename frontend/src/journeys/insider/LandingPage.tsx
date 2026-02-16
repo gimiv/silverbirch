@@ -48,7 +48,7 @@ const InsiderLandingPage: React.FC = () => {
     return (
         <Layout>
             {/* --- Hero Section: Dynamic Carousel --- */}
-            <div className="relative h-[600px] w-full overflow-hidden bg-[#050806]">
+            <div className="relative min-h-[600px] w-full overflow-hidden bg-[#050806] flex flex-col justify-end">
                 <AnimatePresence mode='wait'>
                     <motion.div
                         key={currentSlide}
@@ -69,7 +69,7 @@ const InsiderLandingPage: React.FC = () => {
                 </AnimatePresence>
 
                 {/* Hero Content */}
-                <div className="absolute inset-0 z-20 container mx-auto px-4 flex flex-col justify-end pb-20">
+                <div className="relative z-20 container mx-auto px-4 flex flex-col justify-end pb-20 pt-32">
                     <div className="max-w-3xl">
                         <span className="inline-block px-3 py-1 bg-[#51C580] text-white rounded-full text-xs font-bold tracking-widest uppercase mb-6 shadow-[0_0_20px_rgba(81,197,128,0.4)]">
                             Private Network Access
