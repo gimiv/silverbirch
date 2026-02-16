@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, Star, ShieldCheck, Clock } from 'lucide-react';
 import InsiderScheduler from './InsiderScheduler';
+import EmailCaptureModal from './EmailCaptureModal';
 import Layout from '../../components/Layout';
 
 // Mock Data for Hero Carousel
@@ -140,6 +141,8 @@ const InsiderLandingPage: React.FC = () => {
                     </div>
                 </div>
             </section>
+
+            <EmailCaptureModal />
         </Layout>
     );
 };
