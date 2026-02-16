@@ -58,8 +58,8 @@ const PortalPage: React.FC = () => {
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {workflows.map((flow) => (
-                        <div key={flow.id} className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
-                            <div className="p-6">
+                        <div key={flow.id} className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow flex flex-col h-full">
+                            <div className="p-6 flex flex-col h-full">
                                 <div className="flex items-center justify-between mb-4">
                                     <div className="bg-brand-secondary/50 p-3 rounded-lg">
                                         {flow.icon}
@@ -70,12 +70,12 @@ const PortalPage: React.FC = () => {
                                     </span>
                                 </div>
                                 <h3 className="text-xl font-bold text-gray-900 mb-2">{flow.title}</h3>
-                                <p className="text-gray-500 text-sm mb-6 h-10">{flow.description}</p>
+                                <p className="text-gray-500 text-sm mb-6 flex-grow">{flow.description}</p>
 
                                 <button
                                     onClick={() => flow.path !== '#' && navigate(flow.path)}
                                     disabled={flow.path === '#'}
-                                    className="w-full flex items-center justify-center gap-2 bg-gray-900 text-white py-2.5 rounded-lg font-medium hover:bg-black transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="w-full flex items-center justify-center gap-2 bg-gray-900 text-white py-2.5 rounded-lg font-medium hover:bg-black transition-colors disabled:opacity-50 disabled:cursor-not-allowed mt-auto"
                                 >
                                     Launch Journey <ArrowRight size={16} />
                                 </button>
