@@ -108,7 +108,7 @@ const IntegratedLandingPage: React.FC = () => {
 
                                     <div className="mb-6 relative h-48 rounded-2xl overflow-hidden group">
                                         <img
-                                            src="https://images.unsplash.com/photo-1683848644075-82eb557b8623?w=800&auto=format&fit=crop&q=80"
+                                            src="https://images.unsplash.com/photo-1597452485669-2c7bb5fef90d?q=80&w=2070&auto=format&fit=crop"
                                             alt="Therapy Session"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                         />

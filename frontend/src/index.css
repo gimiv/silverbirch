@@ -59,4 +59,19 @@
   .card {
     @apply bg-white rounded-xl shadow-md p-6 border border-gray-100;
   }
+
+  .anime-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }

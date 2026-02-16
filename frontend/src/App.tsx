@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import OfferPage from './workflows/scale-health/OfferPage';
 import LandingPage from './workflows/scale-health/LandingPage';
 import IntegratedLandingPage from './workflows/integrated-offer/LandingPage';
-import IntakePage from './workflows/intake/IntakePage';
+// import IntakePage from './workflows/intake/IntakePage'; // Deleted
 import PortalPage from './pages/PortalPage';
 import LoginPage from './pages/LoginPage';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -27,7 +27,7 @@ const App: React.FC = () => {
         {/* Protected Routes */}
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<PortalPage />} />
-          <Route path="/w/intake" element={<IntakePage />} />
+          {/* <Route path="/w/intake" element={<IntakePage />} /> */}
           <Route path="/w/integrated-offer" element={<IntegratedLandingPage />} />
           <Route path="/w/scale-health/offer" element={<OfferPage />} />
           <Route path="/w/scale-health/landing" element={<LandingPage />} />

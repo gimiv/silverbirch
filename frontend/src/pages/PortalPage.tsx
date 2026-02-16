@@ -7,26 +7,18 @@ const PortalPage: React.FC = () => {
 
     const workflows = [
         {
-            id: 'scale-health',
-            title: 'Scale Health Partner Flow',
-            description: 'Post-purchase offer from Dr. Ho → Scale Health Landing Page → Scheduler.',
-            path: '/w/scale-health/offer',
-            icon: <Activity className="text-brand-primary" size={24} />,
-            status: 'Live'
-        },
-        {
             id: 'integrated-offer',
-            title: 'Client Example 2: Integrated Offer',
+            title: 'Client Example 1: Integrated Offer',
             description: 'Direct landing on Scale Health with the Dr. Ho offer embedded in the hero section.',
             path: '/w/integrated-offer',
             icon: <Activity className="text-brand-primary" size={24} />,
             status: 'Live'
         },
         {
-            id: 'intake',
-            title: 'Client Example 3: Automated Intake',
-            description: 'Smart routing flow: Postal Code + Preference → 3 Recommended Care Pathways.',
-            path: '/w/intake',
+            id: 'scale-health',
+            title: 'Client Example 2: Automated Intake',
+            description: 'Standard Scale Health landing page with scheduler.',
+            path: '/w/scale-health/landing',
             icon: <Layout className="text-brand-primary" size={24} />,
             status: 'Live'
         }

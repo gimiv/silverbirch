@@ -15,7 +15,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                         <img
                             src="https://www.scalehealth.ca/assets/logo/scale-health_wordmark.svg"
                             alt="Scale Health"
-                            className="h-8 md:h-10"
+                            className="h-12 md:h-16"
                         />
                     </Link>
                     <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">

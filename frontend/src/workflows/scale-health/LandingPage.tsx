@@ -1,8 +1,8 @@
 import React from 'react';
 import Layout from '../../components/Layout';
-import Scheduler from '../../components/Scheduler';
 import ChatBot from '../../components/ChatBot';
-import { ArrowDown, CheckCircle, Smartphone, Activity, Users, ArrowRight } from 'lucide-react';
+import { IntakeFlow } from '../../components/IntakeFlow';
+import { CheckCircle, Smartphone, Activity, Users, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const LandingPage: React.FC = () => {
@@ -206,18 +206,18 @@ const LandingPage: React.FC = () => {
             {/* Scheduling Section */}
             <section id="schedule" className="py-24 bg-[#F4FAF6] relative">
                 <div className="container mx-auto px-4 relative z-10">
-                    <div className="flex flex-col lg:flex-row items-start justify-between gap-16">
-                        <div className="lg:w-1/2 sticky top-24">
+                    <div className="max-w-4xl mx-auto">
+                        <div className="text-center mb-12">
                             <span className="text-[#51C580] font-bold tracking-wider uppercase text-sm">Getting Started</span>
                             <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 mt-3 text-[#050806]">
-                                Schedule Your <br />Priority Session
+                                Schedule Your <br className="hidden md:block" />Priority Session
                             </h2>
-                            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                            <p className="text-lg text-gray-600 mb-8 leading-relaxed max-w-2xl mx-auto">
                                 Use the calendar to choose a time that works for you. Your session includes a comprehensive assessment and personalized plan.
                             </p>
 
-                            <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
-                                <ul className="space-y-4">
+                            <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 inline-block text-left w-full">
+                                <ul className="grid md:grid-cols-2 gap-6">
                                     {[
                                         "Assessment of current condition",
                                         "Review of medical history",
@@ -225,8 +225,8 @@ const LandingPage: React.FC = () => {
                                         "Q&A with a specialist"
                                     ].map((item, i) => (
                                         <li key={i} className="flex items-center gap-4 text-gray-700 font-medium">
-                                            <div className="w-6 h-6 rounded-full bg-[#51C580]/20 flex items-center justify-center text-[#51C580]">
-                                                <CheckCircle size={14} />
+                                            <div className="w-8 h-8 rounded-full bg-[#51C580]/20 flex items-center justify-center text-[#51C580] flex-shrink-0">
+                                                <CheckCircle size={16} />
                                             </div>
                                             {item}
                                         </li>
@@ -235,9 +235,9 @@ const LandingPage: React.FC = () => {
                             </div>
                         </div>
 
-                        {/* The Scheduler Component */}
-                        <div className="w-full lg:w-1/2">
-                            <Scheduler />
+                        {/* The Intake Flow (Full Width) */}
+                        <div className="w-full">
+                            <IntakeFlow embedded={true} />
                         </div>
                     </div>
                 </div>
