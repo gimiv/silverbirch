@@ -4,7 +4,7 @@ import Scheduler from './Scheduler'; // Default import based on hypothesis, will
 
 // --- Types ---
 type Step = 1 | 2 | 3;
-type Preference = 'virtual' | 'in-person';
+type Preference = 'virtual' | 'in-person' | 'both';
 
 // --- Mock Data (Expanded for Scrolling) ---
 const THERAPISTS = [
@@ -124,9 +124,10 @@ export const IntakeFlow: React.FC<IntakeFlowProps> = ({ embedded = false }) => {
                 </div>
 
                 {/* Preference Selection */}
+                {/* Preference Selection */}
                 <div className="mb-8">
                     <label className="block text-sm font-bold text-gray-700 mb-3">Care Preference</label>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <button
                             onClick={() => setPreference('virtual')}
                             className={`p-4 rounded-xl border-2 transition-all flex flex-col items-center gap-3 ${preference === 'virtual'
@@ -135,7 +136,7 @@ export const IntakeFlow: React.FC<IntakeFlowProps> = ({ embedded = false }) => {
                                 }`}
                         >
                             <Monitor size={28} />
-                            <span className="font-bold">Virtual Care</span>
+                            <span className="font-bold text-sm">Virtual Care</span>
                         </button>
                         <button
                             onClick={() => setPreference('in-person')}
@@ -145,7 +146,21 @@ export const IntakeFlow: React.FC<IntakeFlowProps> = ({ embedded = false }) => {
                                 }`}
                         >
                             <Users size={28} />
-                            <span className="font-bold">In-Person</span>
+                            <span className="font-bold text-sm">In-Person</span>
+                        </button>
+                        <button
+                            onClick={() => setPreference('both')}
+                            className={`p-4 rounded-xl border-2 transition-all flex flex-col items-center gap-3 ${preference === 'both'
+                                ? 'border-[#51C580] bg-[#51C580]/5 text-[#51C580]'
+                                : 'border-gray-100 hover:border-gray-200 text-gray-600'
+                                }`}
+                        >
+                            <div className="flex">
+                                <Monitor size={20} />
+                                <span className="mx-1">/</span>
+                                <Users size={20} />
+                            </div>
+                            <span className="font-bold text-sm">Either</span>
                         </button>
                     </div>
                 </div>

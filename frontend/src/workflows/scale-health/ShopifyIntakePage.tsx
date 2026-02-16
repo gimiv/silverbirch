@@ -1,7 +1,6 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { CheckCircle, MapPin, Clock, ArrowRight } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { CheckCircle, MapPin, Clock, ArrowRight, X } from 'lucide-react';
+import { IntakeFlow } from '../../components/IntakeFlow';
 
 const CountdownTimer = () => {
     const [timeLeft, setTimeLeft] = useState(5 * 60); // 5 minutes in seconds
@@ -23,9 +22,18 @@ const CountdownTimer = () => {
         </span>
     );
 };
+const ShopifyIntakePage: React.FC = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-const OfferPage: React.FC = () => {
-    const navigate = useNavigate();
+    // Prevent body scroll when modal is open
+    useEffect(() => {
+        if (isModalOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => { document.body.style.overflow = 'unset'; };
+    }, [isModalOpen]);
 
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
@@ -105,9 +113,9 @@ const OfferPage: React.FC = () => {
                         </div>
                     </div>
 
-                    {/* Right Column: Scale Health Offer (Variation 3 - Side-by-Side Layout) */}
+                    {/* Right Column: Scale Health Offer (Rebranded) */}
                     <div className="md:w-1/2 relative bg-[#F4FAF6] flex flex-col md:flex-row">
-                        {/* Image Side (Left Half of the Right Column) */}
+                        {/* Image Side */}
                         <div className="md:w-1/2 relative h-64 md:h-auto overflow-hidden">
                             <img
                                 src="https://images.unsplash.com/photo-1683848644075-82eb557b8623?w=800&auto=format&fit=crop&q=80"
@@ -116,7 +124,7 @@ const OfferPage: React.FC = () => {
                             />
                         </div>
 
-                        {/* Content Side (Right Half of the Right Column) */}
+                        {/* Content Side */}
                         <div className="md:w-1/2 p-6 md:p-8 flex flex-col justify-center relative">
                             <div className="flex items-center gap-2 mb-4">
                                 <span className="text-lg font-bold font-display text-gray-900">Scale Health</span>
@@ -147,8 +155,9 @@ const OfferPage: React.FC = () => {
                                 <span className="text-[#51C580] font-bold text-sm mb-2 px-2 py-0.5 bg-[#51C580]/10 rounded-md">-40%</span>
                             </div>
 
+                            {/* Trigger Modal */}
                             <button
-                                onClick={() => navigate('/w/scale-health/landing')}
+                                onClick={() => setIsModalOpen(true)}
                                 className="w-full bg-[#51C580] text-white font-bold text-base md:text-lg py-4 px-4 md:px-6 rounded-full hover:bg-[#46ad70] transition-colors flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transform h-auto min-h-[60px]"
                             >
                                 <span className="whitespace-normal text-center flex-1 leading-tight">Talk to an Expert NOW</span>
@@ -163,8 +172,33 @@ const OfferPage: React.FC = () => {
             <footer className="py-6 text-center text-sm text-gray-400">
                 <p>&copy; 2026 Dr. Ho's x Scale Health Partner Program</p>
             </footer>
+
+            {/* Intake Modal */}
+            {isModalOpen && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                    {/* Backdrop */}
+                    <div
+                        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+                        onClick={() => setIsModalOpen(false)}
+                    ></div>
+
+                    {/* Modal Content */}
+                    <div className="bg-white rounded-3xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative z-10 shadow-2xl animate-in fade-in zoom-in duration-300">
+                        <button
+                            onClick={() => setIsModalOpen(false)}
+                            className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors z-20 bg-white/80 backdrop-blur-sm"
+                        >
+                            <X size={24} />
+                        </button>
+
+                        <div className="p-4 md:p-8 pt-16">
+                            <IntakeFlow embedded={true} />
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
 
-export default OfferPage;
+export default ShopifyIntakePage;

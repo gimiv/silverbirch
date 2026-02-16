@@ -29,6 +29,14 @@ const PortalPage: React.FC = () => {
             path: '/w/integrated-offer',
             icon: <Layout className="text-brand-primary" size={24} />,
             status: 'Live'
+        },
+        {
+            id: 'shopify-modal',
+            title: 'Client Example 4: Shopify Modal',
+            description: 'Shopify Cart Offer with "Talk to Expert" opening a modal intake flow.',
+            path: '/w/shopify-modal',
+            icon: <Activity className="text-brand-primary" size={24} />,
+            status: 'New'
         }
     ];
 

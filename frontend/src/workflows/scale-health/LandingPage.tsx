@@ -44,7 +44,7 @@ const LandingPage: React.FC = () => {
                                 transition={{ delay: 0.3, duration: 0.6 }}
                                 className="flex flex-wrap gap-4"
                             >
-                                <a href="#schedule" className="bg-[#51C580] text-white font-bold px-8 py-4 rounded-full shadow-lg hover:bg-[#46ad70] transition-all transform hover:-translate-y-1 flex items-center gap-2">
+                                <a href="#intake-flow" className="bg-[#51C580] text-white font-bold px-8 py-4 rounded-full shadow-lg hover:bg-[#46ad70] transition-all transform hover:-translate-y-1 flex items-center gap-2">
                                     Start Recovery Now <ArrowRight size={18} />
                                 </a>
                                 <button className="px-8 py-4 rounded-full border-2 border-[#95E9B7] text-[#050806] font-bold hover:bg-[#95E9B7]/10 transition-colors">
