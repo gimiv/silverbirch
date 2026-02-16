@@ -161,45 +161,7 @@ const IntegratedLandingPage: React.FC = () => {
                 </div>
             </section>
 
-            {/* Features Grid */}
-            <section className="py-20">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl font-bold mb-4 text-[#050806]">Why Choose Scale Health?</h2>
-                        <p className="text-gray-600 max-w-2xl mx-auto">
-                            We combine advanced technology with human expertise to deliver optimal health outcomes.
-                        </p>
-                    </div>
 
-                    <div className="grid md:grid-cols-3 gap-8">
-                        {[
-                            {
-                                icon: <Activity size={32} />,
-                                title: "Personalized Plans",
-                                desc: "AI-driven plans assessed by real doctors to fit your lifestyle."
-                            },
-                            {
-                                icon: <Smartphone size={32} />,
-                                title: "Digital Accessibility",
-                                desc: "Chat, video call, or schedule visits all from one simple platform."
-                            },
-                            {
-                                icon: <Users size={32} />,
-                                title: "Expert Network",
-                                desc: "Access to top-tier physiotherapists, cairopractors, and mental health experts."
-                            }
-                        ].map((feature, i) => (
-                            <div key={i} className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition-all group">
-                                <div className="w-14 h-14 bg-[#51C580]/10 rounded-2xl flex items-center justify-center text-[#51C580] mb-6 group-hover:scale-110 transition-transform">
-                                    {feature.icon}
-                                </div>
-                                <h3 className="text-xl font-bold mb-3 text-[#050806]">{feature.title}</h3>
-                                <p className="text-gray-600 leading-relaxed">{feature.desc}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
             {/* Scheduler Section */}
             <section id="schedule" className="py-24 bg-white relative">
