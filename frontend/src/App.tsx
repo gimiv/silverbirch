@@ -26,13 +26,15 @@ const App: React.FC = () => {
         <Route path="/login" element={<LoginPage />} />
 
         {/* Protected Routes */}
-        <Route element={<ProtectedRoute />}>
-          <Route path="/" element={<PortalPage />} />
-          <Route path="/w/scale-health/offer" element={<OfferPage />} />
-          <Route path="/w/shopify-modal" element={<ShopifyIntakePage />} />
-          <Route path="/w/integrated-offer" element={<IntegratedLandingPage />} />
-          <Route path="/w/scale-health/landing" element={<LandingPage />} />
-          <Route path="/scale-health" element={<LandingPage />} />
+        {/* Public Routes (Auth Removed) */}
+        <Route path="/" element={<PortalPage />} />
+        <Route path="/w/scale-health/offer" element={<OfferPage />} />
+        <Route path="/w/shopify-modal" element={<ShopifyIntakePage />} />
+        <Route path="/w/integrated-offer" element={<IntegratedLandingPage />} />
+        <Route path="/w/scale-health/landing" element={<LandingPage />} />
+        <Route path="/scale-health" element={<LandingPage />} />
+        <Route path="/w/intake" element={<IntakeLayout />}>
+          <Route index element={<IntakeFlow />} />
         </Route>
       </Routes>
     </Router>
