@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from '../../components/Layout';
 import ChatBot from '../../components/ChatBot';
 import { IntakeFlow } from '../../components/IntakeFlow';
-import { CheckCircle, Smartphone, Activity, Users, ArrowRight } from 'lucide-react';
+import { CheckCircle, ArrowRight, Activity } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const LandingPage: React.FC = () => {

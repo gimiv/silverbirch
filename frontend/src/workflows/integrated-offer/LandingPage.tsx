@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, CheckCircle, Clock, Activity, Smartphone, Users } from 'lucide-react';
+import { ArrowRight, CheckCircle, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Scheduler from '../../components/Scheduler';
 import ChatBot from '../../components/ChatBot';
