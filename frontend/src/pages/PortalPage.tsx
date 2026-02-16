@@ -36,6 +36,14 @@ const PortalPage: React.FC = () => {
             description: 'Shopify Cart Offer with "Talk to Expert" opening a modal intake flow.',
             path: '/w/shopify-modal',
             icon: <Activity className="text-brand-primary" size={24} />,
+            status: 'Live'
+        },
+        {
+            id: 'insider',
+            title: 'Journey 4: The Insider Club',
+            description: 'VIP Concierge flow with dynamic therapist carousel and priority booking.',
+            path: '/w/insider',
+            icon: <Layout className="text-brand-primary" size={24} />,
             status: 'New'
         }
     ];
