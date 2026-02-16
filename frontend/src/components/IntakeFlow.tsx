@@ -280,7 +280,7 @@ export const IntakeFlow: React.FC<IntakeFlowProps> = ({ embedded = false }) => {
     // --- Step 3: Booking (Scheduler) ---
     const renderStep3 = () => (
         <div className="anime-fade-in w-full">
-            <button onClick={handleBack} className="flex items-center text-gray-400 hover:text-gray-600 mb-6 transition-colors px-4 lg:px-0">
+            <button onClick={handleBack} className="flex items-center text-gray-600 hover:text-gray-900 mb-6 transition-colors px-4 lg:px-0 font-bold">
                 <ArrowLeft size={16} className="mr-1" /> Back to specialists
             </button>
             <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">

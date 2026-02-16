@@ -101,7 +101,7 @@ END:VCALENDAR`;
                     <span className="inline-block px-3 py-1 bg-[#51C580]/20 text-[#51C580] rounded-full text-xs font-bold tracking-wider mb-4 border border-[#51C580]/20">
                         STEP {step === 'date' ? '1' : '2'} OF 2
                     </span>
-                    <h3 className="text-3xl font-display font-bold mb-2">
+                    <h3 className="text-3xl font-display font-bold mb-2 text-white">
                         {therapist ? `Book with ${therapist.name}` : 'Discovery Call'}
                     </h3>
 
@@ -109,8 +109,8 @@ END:VCALENDAR`;
                         <div className="flex items-center gap-4 mb-6 mt-4 bg-white/5 p-3 rounded-xl border border-white/10">
                             <img src={therapist.image} alt={therapist.name} className="w-12 h-12 rounded-full object-cover border-2 border-[#51C580]" />
                             <div>
-                                <p className="font-bold text-sm">{therapist.name}</p>
-                                <p className="text-xs text-gray-400 capitalize">{therapist.type} Specialist</p>
+                                <p className="font-bold text-sm text-white">{therapist.name}</p>
+                                <p className="text-xs text-gray-300 capitalize">{therapist.type} Specialist</p>
                             </div>
                         </div>
                     )}

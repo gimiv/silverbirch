@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import OfferPage from './workflows/scale-health/OfferPage';
-import LandingPage from './workflows/scale-health/LandingPage';
-import IntegratedLandingPage from './workflows/integrated-offer/LandingPage';
-import ShopifyIntakePage from './workflows/scale-health/ShopifyIntakePage';
+import OfferPage from './journeys/scale-health/OfferPage';
+import LandingPage from './journeys/scale-health/LandingPage';
+import IntegratedLandingPage from './journeys/integrated-offer/LandingPage';
+import ShopifyIntakePage from './journeys/scale-health/ShopifyIntakePage';
 import { IntakeFlow } from './components/IntakeFlow';
 import PortalPage from './pages/PortalPage';
 import LoginPage from './pages/LoginPage';
