@@ -116,7 +116,7 @@ const ShopifyIntakePage: React.FC = () => {
                     {/* Right Column: Scale Health Offer (Rebranded) */}
                     <div className="md:w-1/2 relative bg-[#F4FAF6] flex flex-col md:flex-row">
                         {/* Image Side */}
-                        <div className="md:w-1/2 relative h-64 md:h-auto overflow-hidden">
+                        <div className="md:w-1/2 relative h-48 md:h-auto overflow-hidden">
                             <img
                                 src="https://images.unsplash.com/photo-1683848644075-82eb557b8623?w=800&auto=format&fit=crop&q=80"
                                 alt="Woman in blue sports bra fitness"
@@ -125,7 +125,7 @@ const ShopifyIntakePage: React.FC = () => {
                         </div>
 
                         {/* Content Side */}
-                        <div className="md:w-1/2 p-6 md:p-8 flex flex-col justify-center relative">
+                        <div className="md:w-1/2 p-5 md:p-8 flex flex-col justify-center relative">
                             <div className="flex items-center gap-2 mb-4">
                                 <span className="text-lg font-bold font-display text-gray-900">Scale Health</span>
                                 <div className="text-[#51C580] font-bold text-xl">+</div>
@@ -145,7 +145,7 @@ const ShopifyIntakePage: React.FC = () => {
                                 Listen to it.
                             </h2>
 
-                            <p className="text-gray-500 mb-8 text-sm leading-relaxed">
+                            <p className="text-gray-500 mb-6 md:mb-8 text-sm leading-relaxed">
                                 Talk to a registered therapist about your injury and get the most out of your Dr. Ho products.
                             </p>
 

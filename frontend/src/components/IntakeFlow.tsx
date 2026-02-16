@@ -179,14 +179,28 @@ export const IntakeFlow: React.FC<IntakeFlowProps> = ({ embedded = false }) => {
     // --- Step 2: Therapist Selection (Carousel) ---
     const renderStep2 = () => (
         <div className="w-full h-full flex flex-col anime-fade-in">
-            <div className="flex items-center justify-between mb-8 px-1">
+            {/* Top Row combined to clear space for Modal X */}
+            <div className="mb-2 px-1">
                 <button
                     onClick={handleBack}
                     className="flex items-center text-gray-500 hover:text-[#51C580] transition-colors text-sm font-bold"
                 >
                     <ArrowLeft size={16} className="mr-1" /> Back
                 </button>
-                <div className="flex gap-2">
+            </div>
+
+            <div className="flex items-end justify-between mb-6 md:mb-8 px-1">
+                <div>
+                    <h2 className="text-3xl font-display font-bold text-[#050806] leading-tight">
+                        Best Matches
+                    </h2>
+                    <p className="text-gray-500 text-base mt-2">
+                        {preference === 'virtual' ? 'Virtual' : 'In-Person'} specialists near {postalCode}
+                    </p>
+                </div>
+
+                {/* Scroll Actions - Moved here to avoid overlap with Modal X */}
+                <div className="flex gap-2 pb-1">
                     <button
                         onClick={scrollLeft}
                         className="w-10 h-10 bg-white rounded-full shadow border border-gray-100 flex items-center justify-center text-gray-600 hover:text-[#51C580] hover:border-[#51C580] transition-all"
@@ -200,15 +214,6 @@ export const IntakeFlow: React.FC<IntakeFlowProps> = ({ embedded = false }) => {
                         <ChevronRight size={20} />
                     </button>
                 </div>
-            </div>
-
-            <div className="mb-8 px-1">
-                <h2 className="text-3xl font-display font-bold text-[#050806] leading-tight">
-                    Best Matches
-                </h2>
-                <p className="text-gray-500 text-base mt-2">
-                    {preference === 'virtual' ? 'Virtual' : 'In-Person'} specialists near {postalCode}
-                </p>
             </div>
 
             {/* Carousel Container */}
