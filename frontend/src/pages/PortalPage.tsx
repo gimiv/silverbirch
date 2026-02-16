@@ -69,7 +69,7 @@ const PortalPage: React.FC = () => {
                                     disabled={flow.path === '#'}
                                     className="w-full flex items-center justify-center gap-2 bg-gray-900 text-white py-2.5 rounded-lg font-medium hover:bg-black transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
-                                    Launch Workflow <ArrowRight size={16} />
+                                    Launch Journey <ArrowRight size={16} />
                                 </button>
                             </div>
                         </div>
