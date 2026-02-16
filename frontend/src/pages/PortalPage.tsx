@@ -45,7 +45,7 @@ const PortalPage: React.FC = () => {
             <div className="max-w-5xl mx-auto">
                 <header className="mb-12 text-center">
                     <h1 className="text-4xl font-display font-bold text-gray-900 mb-2">Client Examples</h1>
-                    <p className="text-gray-600">Select a workflow to preview.</p>
+                    <p className="text-gray-600">Select a journey to preview.</p>
                 </header>
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
