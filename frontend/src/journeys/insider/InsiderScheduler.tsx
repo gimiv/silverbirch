@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import { format, addDays, startOfToday } from 'date-fns';
-import { ChevronLeft, ChevronRight, CheckCircle, Calendar as CalendarIcon, Clock, User, MessageSquare, Download, Filter, Star } from 'lucide-react';
+import { ChevronLeft, ChevronRight, CheckCircle, Calendar as CalendarIcon, Clock } from 'lucide-react';
 import 'react-day-picker/dist/style.css';
 
 // --- Mock Data ---

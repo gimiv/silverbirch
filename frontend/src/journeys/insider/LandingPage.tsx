@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, MessageSquare, Phone, Star, ShieldCheck, Clock } from 'lucide-react';
+import { MessageSquare, Star, ShieldCheck, Clock } from 'lucide-react';
 import InsiderScheduler from './InsiderScheduler';
 import Layout from '../../components/Layout';
 

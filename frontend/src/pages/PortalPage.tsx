@@ -40,7 +40,7 @@ const PortalPage: React.FC = () => {
         },
         {
             id: 'insider',
-            title: 'Journey 4: The Insider Club',
+            title: 'Journey 5: The Insider Club',
             description: 'VIP Concierge flow with dynamic therapist carousel and priority booking.',
             path: '/w/insider',
             icon: <Layout className="text-brand-primary" size={24} />,
