@@ -64,7 +64,7 @@ const InsiderLandingPage: React.FC = () => {
                         <img
                             src={HERO_THERAPISTS[currentSlide].image}
                             alt={HERO_THERAPISTS[currentSlide].name}
-                            className="w-full h-full object-cover object-top"
+                            className="w-full h-full object-cover object-[50%_25%]"
                         />
                     </motion.div>
                 </AnimatePresence>
