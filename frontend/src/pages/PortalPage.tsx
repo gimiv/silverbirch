@@ -19,6 +19,14 @@ const PortalPage: React.FC = () => {
             title: 'Client Example 2: Integrated Offer',
             description: 'Direct landing on Scale Health with the Dr. Ho offer embedded in the hero section.',
             path: '/w/integrated-offer',
+            icon: <Activity className="text-brand-primary" size={24} />,
+            status: 'Live'
+        },
+        {
+            id: 'intake',
+            title: 'Client Example 3: Automated Intake',
+            description: 'Smart routing flow: Postal Code + Preference → 3 Recommended Care Pathways.',
+            path: '/w/intake',
             icon: <Layout className="text-brand-primary" size={24} />,
             status: 'Live'
         }
