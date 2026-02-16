@@ -1,4 +1,4 @@
 [build]
-  base = "frontend"
-  publish = "dist"
-  command = "npm run build"
+  # base = "" # Run from root
+  publish = "frontend/dist"
+  command = "cd frontend && npm install && npm run build"
