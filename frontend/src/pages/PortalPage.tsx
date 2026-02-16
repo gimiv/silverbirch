@@ -29,7 +29,7 @@ const PortalPage: React.FC = () => {
         <div className="min-h-screen bg-gray-50 font-sans p-8">
             <div className="max-w-5xl mx-auto">
                 <header className="mb-12 text-center">
-                    <h1 className="text-4xl font-display font-bold text-gray-900 mb-2">Prototype Portal</h1>
+                    <h1 className="text-4xl font-display font-bold text-gray-900 mb-2">Sample Workflows</h1>
                     <p className="text-gray-600">Select a workflow to preview.</p>
                 </header>
 
