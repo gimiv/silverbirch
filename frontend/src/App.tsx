@@ -5,7 +5,6 @@ import LandingPage from './workflows/scale-health/LandingPage';
 import IntegratedLandingPage from './workflows/integrated-offer/LandingPage';
 import ShopifyIntakePage from './workflows/scale-health/ShopifyIntakePage';
 import { IntakeFlow } from './components/IntakeFlow';
-import IntakeLayout from './workflows/intake/IntakeLayout';
 import PortalPage from './pages/PortalPage';
 import LoginPage from './pages/LoginPage';
 // import ProtectedRoute from './components/ProtectedRoute';
@@ -34,9 +33,7 @@ const App: React.FC = () => {
         <Route path="/w/integrated-offer" element={<IntegratedLandingPage />} />
         <Route path="/w/scale-health/landing" element={<LandingPage />} />
         <Route path="/scale-health" element={<LandingPage />} />
-        <Route path="/w/intake" element={<IntakeLayout />}>
-          <Route index element={<IntakeFlow />} />
-        </Route>
+        <Route path="/w/intake" element={<IntakeFlow />} />
       </Routes>
     </Router>
   );
