@@ -128,28 +128,30 @@ const OfferPage: React.FC = () => {
                                 <span className="text-xs font-bold text-red-600 uppercase tracking-wider">Offer Expires in: <CountdownTimer /></span>
                             </div>
 
-                            <h3 className="text-green-500 font-bold uppercase tracking-wider text-xs mb-3">Save $60 Today</h3>
+                            <span className="inline-block px-3 py-1 rounded-full bg-[#51C580]/10 text-[#51C580] font-bold text-xs tracking-wider mb-4 w-fit">
+                                SAVE $60 TODAY
+                            </span>
 
-                            <h2 className="text-3xl font-display font-bold text-gray-900 mb-4 leading-tight">
+                            <h2 className="text-3xl font-display font-bold text-[#050806] mb-4 leading-tight">
                                 Your body knows something's wrong. <br />
                                 Listen to it.
                             </h2>
 
-                            <p className="text-gray-500 mb-6 text-sm leading-relaxed">
+                            <p className="text-gray-500 mb-8 text-sm leading-relaxed">
                                 Talk to a registered therapist about your injury and get the most out of your Dr. Ho products.
                             </p>
 
-                            <div className="flex items-end gap-2 mb-6">
-                                <span className="text-lg text-gray-400 line-through mb-1 font-medium">$150</span>
-                                <span className="text-4xl font-bold text-gray-900">$90</span>
-                                <span className="text-green-600 font-bold text-sm mb-2 ml-1">40% OFF</span>
+                            <div className="flex items-end gap-3 mb-8">
+                                <span className="text-xl text-gray-400 line-through mb-1 font-medium">$150</span>
+                                <span className="text-5xl font-bold text-[#050806] tracking-tight">$90</span>
+                                <span className="text-[#51C580] font-bold text-sm mb-2 px-2 py-0.5 bg-[#51C580]/10 rounded-md">-40%</span>
                             </div>
 
                             <button
                                 onClick={() => navigate('/w/scale-health/landing')}
-                                className="w-full bg-slate-900 text-white font-bold text-base py-3 rounded-lg hover:bg-black transition-colors flex items-center justify-center gap-2 shadow-lg"
+                                className="w-full bg-[#51C580] text-white font-bold text-lg py-4 rounded-full hover:bg-[#46ad70] transition-colors flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transform"
                             >
-                                Talk to an Expert NOW <ArrowRight size={18} />
+                                Talk to an Expert NOW <ArrowRight size={20} />
                             </button>
                         </div>
                     </div>

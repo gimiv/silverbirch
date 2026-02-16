@@ -2,61 +2,97 @@ import React from 'react';
 import Layout from '../../components/Layout';
 import Scheduler from '../../components/Scheduler';
 import ChatBot from '../../components/ChatBot';
-import { ArrowDown, CheckCircle, Smartphone, Activity, Users } from 'lucide-react';
+import { ArrowDown, CheckCircle, Smartphone, Activity, Users, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const LandingPage: React.FC = () => {
     return (
         <Layout>
+            {/* Header Override (since Layout might have default) - We can just rely on the content here or if Layout helps, we use it. 
+                For this specific page, let's assume Layout provides the shell but we want to ensure the header inside Layout matches.
+                Actually, the Layout component wasn't shown to have a logo prop, let's assume it's generic.
+                We'll inject a custom header here if needed, or if Layout is simple enough.
+                Looking at previous files, Layout.tsx seemed simple. Let's just build the page content.
+            */}
+
             {/* Hero Section */}
-            <section className="relative bg-brand-dark text-white py-20 overflow-hidden">
-                <div className="absolute inset-0 z-0 opacity-20">
-                    {/* Abstract Background pattern */}
-                    <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-brand-primary to-transparent"></div>
-                    <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-brand-accent rounded-full blur-3xl opacity-30"></div>
-                </div>
-
+            <section className="relative bg-[#F4FAF6] pt-32 pb-20 overflow-hidden">
                 <div className="container mx-auto px-4 z-10 relative">
-                    <div className="max-w-3xl mx-auto text-center space-y-6">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6 }}
-                        >
-                            <h1 className="text-5xl md:text-6xl font-display font-bold leading-tight mb-4 text-white">
-                                Hyper Scale Your <br />
-                                <span className="text-brand-accent">Recovery Journey</span>
-                            </h1>
-                            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                                Connect with world-class specialists tailored to your specific needs.
-                                Experience the future of digital health with Scale Health.
-                            </p>
-                        </motion.div>
+                    <div className="flex flex-col md:flex-row items-center gap-12">
+                        <div className="md:w-1/2 space-y-8">
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6 }}
+                            >
+                                <span className="inline-block px-4 py-1.5 rounded-full bg-[#51C580]/10 text-[#51C580] font-bold text-sm tracking-wide mb-6">
+                                    OFFICIAL DR. HO PARTNER
+                                </span>
+                                <h1 className="text-5xl md:text-6xl font-display font-bold leading-tight text-[#050806] mb-6">
+                                    Hyper Scale Your <br />
+                                    <span className="text-[#51C580]">Recovery Journey</span>
+                                </h1>
+                                <p className="text-xl text-gray-600 leading-relaxed max-w-lg">
+                                    Connect with world-class specialists tailored to your specific needs.
+                                    Experience the future of digital health with Scale Health.
+                                </p>
+                            </motion.div>
 
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.3, duration: 0.6 }}
-                            className="flex justify-center gap-4 pt-4"
-                        >
-                            <a href="#schedule" className="btn-primary bg-brand-accent hover:bg-white hover:text-brand-dark border-none">
-                                Start Recovery Now
-                            </a>
-                            <button className="px-6 py-3 rounded-lg border border-white/30 hover:bg-white/10 transition-colors">
-                                Learn More
-                            </button>
-                        </motion.div>
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.3, duration: 0.6 }}
+                                className="flex flex-wrap gap-4"
+                            >
+                                <a href="#schedule" className="bg-[#51C580] text-white font-bold px-8 py-4 rounded-full shadow-lg hover:bg-[#46ad70] transition-all transform hover:-translate-y-1 flex items-center gap-2">
+                                    Start Recovery Now <ArrowRight size={18} />
+                                </a>
+                                <button className="px-8 py-4 rounded-full border-2 border-[#95E9B7] text-[#050806] font-bold hover:bg-[#95E9B7]/10 transition-colors">
+                                    Learn More
+                                </button>
+                            </motion.div>
+
+                            <div className="flex items-center gap-6 pt-4 text-sm text-gray-500 font-medium">
+                                <div className="flex items-center gap-2">
+                                    <CheckCircle size={18} className="text-[#51C580]" />
+                                    <span>Insurance Covered</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <CheckCircle size={18} className="text-[#51C580]" />
+                                    <span>24/7 Access</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="md:w-1/2 relative">
+                            <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-gray-100">
+                                <img
+                                    src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&auto=format&fit=crop&q=80"
+                                    alt="Medical Professional"
+                                    className="w-full h-auto object-cover"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                            </div>
+
+                            {/* Floating Badge */}
+                            <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl border border-gray-50 hidden md:block">
+                                <div className="flex items-center gap-4">
+                                    <div className="w-12 h-12 bg-[#51C580]/10 rounded-full flex items-center justify-center text-[#51C580]">
+                                        <Activity size={24} />
+                                    </div>
+                                    <div>
+                                        <p className="text-xs text-gray-500 uppercase tracking-wider font-bold">Success Rate</p>
+                                        <p className="text-2xl font-bold text-[#050806]">98%</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-
-                {/* Scroll Indicator */}
-                <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-                    <ArrowDown className="text-white/50" />
                 </div>
             </section>
 
             {/* Stats/Social Proof */}
-            <section className="py-10 bg-white border-b border-gray-100">
+            <section className="py-12 bg-white border-y border-gray-100">
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                         {[
@@ -66,8 +102,8 @@ const LandingPage: React.FC = () => {
                             { label: "Insurance Covered", value: "100%" },
                         ].map((stat, i) => (
                             <div key={i}>
-                                <p className="text-3xl font-bold text-brand-primary font-display">{stat.value}</p>
-                                <p className="text-sm text-gray-500 uppercase tracking-widest">{stat.label}</p>
+                                <p className="text-4xl font-bold text-[#51C580] font-display mb-1">{stat.value}</p>
+                                <p className="text-xs text-gray-400 uppercase tracking-widest font-bold">{stat.label}</p>
                             </div>
                         ))}
                     </div>
@@ -75,11 +111,12 @@ const LandingPage: React.FC = () => {
             </section>
 
             {/* Features Grid */}
-            <section className="py-20 bg-brand-secondary/30">
+            <section className="py-24 bg-[#F4FAF6]">
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl font-bold mb-4">Why Choose Scale Health?</h2>
-                        <p className="text-gray-600 max-w-2xl mx-auto">
+                        <span className="text-[#51C580] font-bold tracking-wider uppercase text-sm">Our Approach</span>
+                        <h2 className="text-4xl font-bold mb-4 text-[#050806] mt-2">Why Choose Scale Health?</h2>
+                        <p className="text-gray-600 max-w-2xl mx-auto text-lg">
                             We combine advanced technology with human expertise to deliver optimal health outcomes.
                         </p>
                     </div>
@@ -102,12 +139,12 @@ const LandingPage: React.FC = () => {
                                 desc: "Access to top-tier physiotherapists, cairopractors, and mental health experts."
                             }
                         ].map((feature, i) => (
-                            <div key={i} className="card hover:border-brand-primary/50 transition-colors group">
-                                <div className="w-14 h-14 bg-brand-secondary rounded-xl flex items-center justify-center text-brand-primary mb-6 group-hover:scale-110 transition-transform">
+                            <div key={i} className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition-all group">
+                                <div className="w-16 h-16 bg-[#F4FAF6] rounded-2xl flex items-center justify-center text-[#51C580] mb-6 group-hover:scale-110 transition-transform">
                                     {feature.icon}
                                 </div>
-                                <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-                                <p className="text-gray-600">{feature.desc}</p>
+                                <h3 className="text-xl font-bold mb-3 text-[#050806]">{feature.title}</h3>
+                                <p className="text-gray-600 leading-relaxed">{feature.desc}</p>
                             </div>
                         ))}
                     </div>
@@ -115,11 +152,11 @@ const LandingPage: React.FC = () => {
             </section>
 
             {/* Recommended Products Section */}
-            <section className="py-20 bg-gray-50">
+            <section className="py-24 bg-white">
                 <div className="container mx-auto px-4">
-                    <div className="text-center mb-12">
-                        <span className="text-brand-accent font-bold tracking-wider uppercase text-sm">Integrate Your Recovery</span>
-                        <h2 className="text-3xl font-display font-bold text-gray-900 mt-2">Therapist Recommended Products</h2>
+                    <div className="text-center mb-16">
+                        <span className="text-[#51C580] font-bold tracking-wider uppercase text-sm">Integrate Your Recovery</span>
+                        <h2 className="text-4xl font-display font-bold text-[#050806] mt-2">Therapist Recommended Products</h2>
                         <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
                             Maximize your recovery results by pairing your therapy with these professional-grade devices from Dr. Ho.
                         </p>
@@ -146,17 +183,17 @@ const LandingPage: React.FC = () => {
                                 tag: "New Arrival"
                             }
                         ].map((product, i) => (
-                            <div key={i} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow border border-gray-100 group">
-                                <div className="h-64 overflow-hidden bg-gray-100 relative">
-                                    <span className="absolute top-4 left-4 bg-brand-dark text-white text-xs font-bold px-2 py-1 rounded-full z-10">
+                            <div key={i} className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 group">
+                                <div className="h-72 overflow-hidden bg-gray-50 relative p-8 flex items-center justify-center">
+                                    <span className="absolute top-4 left-4 bg-[#050806] text-white text-xs font-bold px-3 py-1.5 rounded-full z-10">
                                         {product.tag}
                                     </span>
-                                    <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                    <img src={product.image} alt={product.name} className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
                                 </div>
-                                <div className="p-6">
-                                    <h4 className="font-bold text-lg text-gray-900 mb-1">{product.name}</h4>
-                                    <p className="text-brand-primary font-bold">{product.price}</p>
-                                    <button className="w-full mt-4 py-2 border border-brand-primary text-brand-primary rounded-lg hover:bg-brand-primary hover:text-white transition-colors font-medium text-sm">
+                                <div className="p-8">
+                                    <h4 className="font-bold text-xl text-[#050806] mb-2">{product.name}</h4>
+                                    <p className="text-[#51C580] font-bold text-lg mb-6">{product.price}</p>
+                                    <button className="w-full py-3 border-2 border-[#51C580] text-[#51C580] rounded-full hover:bg-[#51C580] hover:text-white transition-colors font-bold text-sm">
                                         View Details
                                     </button>
                                 </div>
@@ -167,34 +204,39 @@ const LandingPage: React.FC = () => {
             </section>
 
             {/* Scheduling Section */}
-            <section id="schedule" className="py-24 bg-white">
-                <div className="container mx-auto px-4">
-                    <div className="flex flex-col md:flex-row items-center justify-between mb-12 gap-8">
-                        <div className="md:w-1/2">
-                            <span className="text-brand-accent font-bold tracking-wider uppercase text-sm">Getting Started</span>
-                            <h2 className="text-4xl font-display font-bold mb-4 mt-2">
-                                Schedule Your Priority Session
+            <section id="schedule" className="py-24 bg-[#F4FAF6] relative">
+                <div className="container mx-auto px-4 relative z-10">
+                    <div className="flex flex-col lg:flex-row items-start justify-between gap-16">
+                        <div className="lg:w-1/2 sticky top-24">
+                            <span className="text-[#51C580] font-bold tracking-wider uppercase text-sm">Getting Started</span>
+                            <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 mt-3 text-[#050806]">
+                                Schedule Your <br />Priority Session
                             </h2>
-                            <p className="text-lg text-gray-600 mb-6">
-                                Use the calendar to choose a time that works for you. Your session includes:
+                            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                                Use the calendar to choose a time that works for you. Your session includes a comprehensive assessment and personalized plan.
                             </p>
-                            <ul className="space-y-3">
-                                {[
-                                    "Assessment of current condition",
-                                    "Review of medical history",
-                                    "Personalized recovery recommendations",
-                                    "Q&A with a specialist"
-                                ].map((item, i) => (
-                                    <li key={i} className="flex items-center gap-3 text-gray-700">
-                                        <CheckCircle size={20} className="text-brand-primary" />
-                                        {item}
-                                    </li>
-                                ))}
-                            </ul>
+
+                            <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+                                <ul className="space-y-4">
+                                    {[
+                                        "Assessment of current condition",
+                                        "Review of medical history",
+                                        "Personalized recovery recommendations",
+                                        "Q&A with a specialist"
+                                    ].map((item, i) => (
+                                        <li key={i} className="flex items-center gap-4 text-gray-700 font-medium">
+                                            <div className="w-6 h-6 rounded-full bg-[#51C580]/20 flex items-center justify-center text-[#51C580]">
+                                                <CheckCircle size={14} />
+                                            </div>
+                                            {item}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
                         </div>
 
                         {/* The Scheduler Component */}
-                        <div className="w-full">
+                        <div className="w-full lg:w-1/2">
                             <Scheduler />
                         </div>
                     </div>
