@@ -14,14 +14,13 @@ const PortalPage: React.FC = () => {
             icon: <Activity className="text-brand-primary" size={24} />,
             status: 'Live'
         },
-        // Future workflows can be added here
         {
-            id: 'coming-soon',
-            title: 'Future Workflow',
-            description: 'Placeholder for the next prototype iteration.',
-            path: '#',
-            icon: <Layout className="text-gray-400" size={24} />,
-            status: 'Draft'
+            id: 'integrated-offer',
+            title: 'Client Example 2: Integrated Offer',
+            description: 'Direct landing on Scale Health with the Dr. Ho offer embedded in the hero section.',
+            path: '/w/integrated-offer',
+            icon: <Layout className="text-brand-primary" size={24} />,
+            status: 'Live'
         }
     ];
 
