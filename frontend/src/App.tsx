@@ -4,10 +4,11 @@ import OfferPage from './workflows/scale-health/OfferPage';
 import LandingPage from './workflows/scale-health/LandingPage';
 import IntegratedLandingPage from './workflows/integrated-offer/LandingPage';
 import ShopifyIntakePage from './workflows/scale-health/ShopifyIntakePage';
-// import IntakePage from './workflows/intake/IntakePage'; // Deleted
+import { IntakeFlow } from './components/IntakeFlow';
+import IntakeLayout from './workflows/intake/IntakeLayout';
 import PortalPage from './pages/PortalPage';
 import LoginPage from './pages/LoginPage';
-import ProtectedRoute from './components/ProtectedRoute';
+// import ProtectedRoute from './components/ProtectedRoute';
 
 // Scroll to top on route change
 const ScrollToTop = () => {
