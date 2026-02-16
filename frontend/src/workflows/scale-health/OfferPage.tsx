@@ -57,7 +57,7 @@ const OfferPage: React.FC = () => {
             </header>
 
             <main className="flex-grow container mx-auto px-4 py-8">
-                <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 flex flex-col md:flex-row min-h-[600px]">
+                <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 flex flex-col-reverse md:flex-row min-h-[600px]">
 
                     {/* Left Column: Order Confirmation (Shopify Context) */}
                     <div className="md:w-1/2 p-8 border-r border-gray-100 bg-white relative">
@@ -106,7 +106,7 @@ const OfferPage: React.FC = () => {
                     </div>
 
                     {/* Right Column: Scale Health Offer (Variation 3 - Side-by-Side Layout) */}
-                    <div className="md:w-1/2 relative bg-white flex flex-col md:flex-row">
+                    <div className="md:w-1/2 relative bg-[#F4FAF6] flex flex-col md:flex-row">
                         {/* Image Side (Left Half of the Right Column) */}
                         <div className="md:w-1/2 relative h-64 md:h-auto overflow-hidden">
                             <img
@@ -119,8 +119,8 @@ const OfferPage: React.FC = () => {
                         {/* Content Side (Right Half of the Right Column) */}
                         <div className="md:w-1/2 p-6 md:p-8 flex flex-col justify-center relative">
                             <div className="flex items-center gap-2 mb-4">
-                                <span className="text-lg font-bold text-gray-900">Scale Health</span>
-                                <div className="text-green-500 font-bold text-xl">+</div>
+                                <span className="text-lg font-bold font-display text-gray-900">Scale Health</span>
+                                <div className="text-[#51C580] font-bold text-xl">+</div>
                             </div>
 
                             <div className="flex items-center gap-2 mb-3 bg-red-50 border border-red-100 px-3 py-1.5 rounded-full w-fit">
