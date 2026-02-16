@@ -156,7 +156,7 @@ const LandingPage: React.FC = () => {
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-16">
                         <span className="text-[#51C580] font-bold tracking-wider uppercase text-sm">Integrate Your Recovery</span>
-                        <h2 className="text-4xl font-display font-bold text-[#050806] mt-2">Therapist Recommended Products</h2>
+                        <h2 className="text-4xl font-display font-bold text-[#050806] mt-2">Recommended Products</h2>
                         <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
                             Maximize your recovery results by pairing your therapy with these professional-grade devices from Dr. Ho.
                         </p>

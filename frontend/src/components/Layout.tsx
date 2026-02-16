@@ -11,8 +11,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="min-h-screen flex flex-col font-sans">
             <header className="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
                 <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-                    <Link to="/" className="text-2xl font-display font-bold text-brand-primary">
-                        Scale<span className="text-brand-accent">Health</span>
+                    <Link to="/" className="flex items-center">
+                        <img
+                            src="https://www.scalehealth.ca/assets/logo/scale-health_wordmark.svg"
+                            alt="Scale Health"
+                            className="h-8 md:h-10"
+                        />
                     </Link>
                     <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
                         <Link to="#" className="hover:text-brand-primary transition-colors">Treatments</Link>
@@ -32,9 +36,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <footer className="bg-brand-dark text-white py-12">
                 <div className="container mx-auto px-4 grid md:grid-cols-4 gap-8">
                     <div>
-                        <h3 className="text-2xl font-display font-bold mb-4">
-                            Scale<span className="text-brand-accent">Health</span>
-                        </h3>
+                        <img
+                            src="https://www.scalehealth.ca/assets/logo/scale-health_wordmark.svg"
+                            alt="Scale Health"
+                            className="h-8 mb-4 brightness-0 invert"
+                        />
                         <p className="text-gray-400 text-sm">
                             Your partner in holistic wellness and recovery.
                         </p>

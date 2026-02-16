@@ -106,38 +106,64 @@ const Scheduler: React.FC = () => {
                             <CalendarIcon className="text-brand-primary" /> Select a Date & Time
                         </h4>
 
-                        <div className="flex flex-col md:flex-row gap-8 flex-grow">
-                            <div className="calendar-wrapper border-b md:border-b-0 md:border-r border-gray-100 pb-6 md:pb-0 md:pr-6 md:w-1/2 flex justify-center md:justify-start">
+                        <div className="flex flex-col lg:flex-row gap-12 h-full">
+                            <div className="calendar-container w-full lg:w-1/2 flex justify-center lg:justify-start">
                                 <style>{`
-                  .rdp { --rdp-cell-size: 44px; --rdp-accent-color: #2B5C5D; --rdp-background-color: #E8F3F3; margin: 0;}
-                  .rdp-day_selected:not([disabled]) { background-color: var(--rdp-accent-color); color: white; font-weight: bold; }
-                  .rdp-day_selected:hover:not([disabled]) { background-color: var(--rdp-accent-color); opacity: 0.9; }
-                  .rdp-day:hover:not(.rdp-day_selected) { background-color: #F5F9F9; }
-                  .rdp-caption_label { font-size: 1rem; font-weight: 700; color: #1A3C3D; }
-                  .rdp-head_cell { font-size: 0.8rem; font-weight: 600; color: #6b7280; }
+                  /* Scale Health Calendar Overrides */
+                  .rdp { 
+                    --rdp-cell-size: 40px; 
+                    --rdp-accent-color: #51C580; 
+                    --rdp-background-color: #F4FAF6; 
+                    margin: 0 !important;
+                  }
+                  .rdp-month {
+                    width: 100%;
+                  }
+                  .rdp-table {
+                    width: 100%;
+                    max-width: 320px;
+                    border-collapse: collapse;
+                  }
+                  /* Force Round Mint Green Selection */
+                  .rdp-day_selected, 
+                  .rdp-day_selected:focus-visible, 
+                  .rdp-day_selected:hover,
+                  .rdp-day[aria-selected="true"] {
+                    background-color: #51C580 !important;
+                    color: white !important;
+                    border-radius: 50% !important;
+                    font-weight: bold;
+                  }
+                  .rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
+                    background-color: #F4FAF6;
+                    border-radius: 50%;
+                  }
+                  .rdp-nav_button {
+                    color: #51C580;
+                  }
                 `}</style>
                                 <DayPicker
                                     mode="single"
                                     selected={selectedDate}
                                     onSelect={setSelectedDate}
                                     disabled={{ before: new Date() }}
-                                    className="p-0"
+                                    className="p-0 m-0"
                                 />
                             </div>
 
-                            <div className="flex-1 flex flex-col">
-                                <p className="text-sm font-bold text-gray-700 mb-3 flex justify-between items-center">
+                            <div className="flex flex-col w-full lg:w-1/2 h-full border-t lg:border-t-0 lg:border-l border-gray-100 pt-6 lg:pt-0 lg:pl-10">
+                                <p className="text-sm font-bold text-gray-700 mb-4 flex justify-between items-center">
                                     Available Slots
                                     <span className="text-xs font-normal text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">EST Zone</span>
                                 </p>
-                                <div className="grid grid-cols-2 gap-3 overflow-y-auto pr-1 flex-grow content-start">
+                                <div className="grid grid-cols-2 gap-3 overflow-y-auto pr-2 max-h-[320px] custom-scrollbar">
                                     {TIME_SLOTS.map((time) => (
                                         <button
                                             key={time}
                                             onClick={() => handleTimeSelect(time)}
                                             className={`py-3 px-2 text-sm font-medium rounded-lg border transition-all duration-200 ${selectedTime === time
-                                                    ? 'bg-brand-primary text-white border-brand-primary shadow-md ring-2 ring-brand-primary/20'
-                                                    : 'border-gray-200 text-gray-700 hover:border-brand-primary hover:text-brand-primary hover:bg-brand-secondary/30'
+                                                ? 'bg-[#51C580] text-white border-[#51C580] shadow-md'
+                                                : 'border-gray-200 text-gray-700 hover:border-[#51C580] hover:text-[#51C580] hover:bg-[#F4FAF6]'
                                                 }`}
                                         >
                                             {time}
