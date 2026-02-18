@@ -45,6 +45,14 @@ const PortalPage: React.FC = () => {
             path: '/w/insider',
             icon: <Layout className="text-brand-primary" size={24} />,
             status: 'New'
+        },
+        {
+            id: 'virtual-clinic',
+            title: 'Journey 6: Virtual Clinic Intake',
+            description: 'Patient check-in to provider match to video visit booking (prototype).',
+            path: '/w/virtual-clinic',
+            icon: <Activity className="text-brand-primary" size={24} />,
+            status: 'New'
         }
     ];
 
