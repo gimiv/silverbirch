@@ -170,22 +170,22 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, partner 
                         )}
 
                         {step === 3 && (
-                            <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-4">
-                                <div className="w-16 h-16 bg-[#E8F5EE] rounded-full flex items-center justify-center mx-auto mb-4 text-[#00D46A]">
-                                    <CheckCircle2 size={32} className="text-[#00A852]" />
+                            <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-2 md:py-3">
+                                <div className="w-10 h-10 bg-[#E8F5EE] rounded-full flex items-center justify-center mx-auto mb-2 text-[#00D46A]">
+                                    <CheckCircle2 size={20} className="text-[#00A852]" />
                                 </div>
-                                <h4 className="text-2xl font-display font-bold text-gray-900 mb-2">Booking Confirmed!</h4>
-                                <p className="text-gray-500 mb-6 text-sm">Your consultation with <span className="font-bold text-gray-900">{partner.name}</span> is scheduled.</p>
+                                <h4 className="text-xl md:text-2xl font-display font-bold text-gray-900 mb-1">Booking Confirmed!</h4>
+                                <p className="text-gray-500 mb-4 text-xs md:text-sm">Your consultation with <span className="font-bold text-gray-900">{partner.name}</span> is scheduled.</p>
 
                                 {/* Offers Section */}
-                                <div className="text-left bg-gray-50 p-5 rounded-2xl border border-gray-100">
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <Gift className="text-[#00A852]" size={18} />
-                                        <h5 className="font-bold text-gray-900">Exclusive Wellness Offers</h5>
+                                <div className="text-left bg-gray-50 p-3 md:p-4 rounded-xl md:rounded-2xl border border-gray-100">
+                                    <div className="flex items-center gap-2 mb-1">
+                                        <Gift className="text-[#00A852]" size={16} />
+                                        <h5 className="text-sm md:text-base font-bold text-gray-900">Exclusive Wellness Offers</h5>
                                     </div>
-                                    <p className="text-xs text-gray-500 mb-4 font-medium leading-relaxed">As a ScaleHealth member, enjoy a <span className="text-[#0A0F1E] font-bold">$25 credit</span> towards these premium health & fitness brands to supplement your recovery journey.</p>
+                                    <p className="text-[11px] md:text-xs text-gray-500 mb-3 font-medium leading-relaxed">As a member, enjoy a <span className="text-[#0A0F1E] font-bold">$25 credit</span> towards these premium brands.</p>
 
-                                    <div className="space-y-3">
+                                    <div className="space-y-2">
                                         {[
                                             {
                                                 brand: 'WHOOP',
@@ -203,14 +203,14 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, partner 
                                                 icon: '/logos/Lululemon.svg'
                                             }
                                         ].map((offer, idx) => (
-                                            <div key={idx} className="flex items-center justify-between p-3 bg-white rounded-xl border border-gray-100 shadow-sm hover:border-[#00D46A]/50 hover:shadow-md transition-all cursor-pointer group">
-                                                <div className="flex items-center gap-4">
-                                                    <div className="w-12 h-12 rounded-lg flex items-center justify-center p-2 bg-gray-50 group-hover:bg-white transition-colors border border-gray-100">
+                                            <div key={idx} className="flex items-center justify-between p-2 md:p-3 bg-white rounded-xl border border-gray-100 shadow-sm hover:border-[#00D46A]/50 hover:shadow-md transition-all cursor-pointer group">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center p-1.5 md:p-2 bg-gray-50 group-hover:bg-white transition-colors border border-gray-100">
                                                         <img src={offer.icon} alt={`${offer.brand} Logo`} className="max-w-full max-h-full object-contain" />
                                                     </div>
                                                     <div>
-                                                        <h6 className="font-bold text-sm text-gray-900 group-hover:text-[#0A0F1E] transition-colors">{offer.brand}</h6>
-                                                        <p className="text-xs text-[#00A852] font-semibold">{offer.desc}</p>
+                                                        <h6 className="font-bold text-xs md:text-sm text-gray-900 group-hover:text-[#0A0F1E] transition-colors">{offer.brand}</h6>
+                                                        <p className="text-[10px] md:text-xs text-[#00A852] font-semibold">{offer.desc}</p>
                                                     </div>
                                                 </div>
                                                 <button className="text-gray-400 group-hover:text-[#00A852] transition-colors bg-gray-50 group-hover:bg-[#E8F5EE] p-1.5 rounded-full">
@@ -257,7 +257,7 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, partner 
                         {step === 3 && (
                             <button
                                 onClick={handleClose}
-                                className="w-full bg-[#0A0F1E] hover:bg-black text-white px-8 py-3 rounded-full font-bold transition-all"
+                                className="w-full bg-[#0A0F1E] hover:bg-black text-white px-8 py-2.5 md:py-3 rounded-full font-bold transition-all"
                             >
                                 Done
                             </button>
