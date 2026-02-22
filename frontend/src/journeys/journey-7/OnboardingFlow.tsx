@@ -11,6 +11,20 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ isOpen, onClose }) => {
     const [step, setStep] = useState(1);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [agreed, setAgreed] = useState(false);
+    const [selectedServices, setSelectedServices] = useState<string[]>([]);
+
+    const availableServices = [
+        "Physiotherapy", "Chiropractic", "Massage Therapy",
+        "Acupuncture", "Osteopathy", "Naturopathy", "Kinesiology"
+    ];
+
+    const toggleService = (service: string) => {
+        setSelectedServices(prev =>
+            prev.includes(service)
+                ? prev.filter(s => s !== service)
+                : [...prev, service]
+        );
+    };
 
     if (!isOpen) return null;
 
@@ -113,15 +127,25 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ isOpen, onClose }) => {
                         {step === 2 && (
                             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }} className="space-y-6">
                                 <div>
-                                    <label className="block text-sm font-bold text-gray-700 mb-2">Primary Service Offered</label>
-                                    <div className="relative">
-                                        <Activity className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
-                                        <select className="w-full pl-12 pr-4 py-3.5 rounded-xl border-2 border-gray-100 focus:border-[#00D46A] focus:ring-0 outline-none transition-colors font-medium text-gray-900 bg-white appearance-none">
-                                            <option>Physiotherapy</option>
-                                            <option>Chiropractic</option>
-                                            <option>Massage Therapy</option>
-                                            <option>Acupuncture</option>
-                                        </select>
+                                    <label className="block text-sm font-bold text-gray-700 mb-2">Services Offered</label>
+                                    <p className="text-xs text-gray-500 mb-3">Select all that apply to your practice.</p>
+                                    <div className="flex flex-wrap gap-2">
+                                        {availableServices.map(service => {
+                                            const isSelected = selectedServices.includes(service);
+                                            return (
+                                                <button
+                                                    key={service}
+                                                    onClick={() => toggleService(service)}
+                                                    className={`px-4 py-2 rounded-full text-sm font-bold transition-all border 
+                                                        ${isSelected
+                                                            ? 'bg-[#00D46A] text-white border-[#00D46A] shadow-[0_0_10px_rgba(0,212,106,0.3)]'
+                                                            : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                                                        }`}
+                                                >
+                                                    {service}
+                                                </button>
+                                            );
+                                        })}
                                     </div>
                                 </div>
 
@@ -247,7 +271,11 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ isOpen, onClose }) => {
                         {step === 4 && <div className="w-full" />}
 
                         {(step === 1 || step === 2) && (
-                            <button onClick={handleNext} className="bg-[#00D46A] hover:bg-[#00A852] text-white px-8 py-3 rounded-full font-bold transition-all flex items-center gap-2 ml-auto">
+                            <button
+                                onClick={handleNext}
+                                disabled={step === 2 && selectedServices.length === 0}
+                                className="bg-[#00D46A] hover:bg-[#00A852] text-white px-8 py-3 rounded-full font-bold transition-all flex items-center gap-2 ml-auto disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
                                 Continue <ChevronRight size={18} />
                             </button>
                         )}
