@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronRight, CheckCircle2, Upload, User, MapPin, Clock, DollarSign, Activity, Award } from 'lucide-react';
+import { X, ChevronRight, CheckCircle2, Upload, User, MapPin, Clock, DollarSign, Activity, Award, Plus, Trash2 } from 'lucide-react';
 
 interface OnboardingFlowProps {
     isOpen: boolean;
@@ -11,20 +11,33 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ isOpen, onClose }) => {
     const [step, setStep] = useState(1);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [agreed, setAgreed] = useState(false);
-    const [selectedServices, setSelectedServices] = useState<string[]>([]);
 
-    const availableServices = [
+    // Services state: array of objects with id, name, and price
+    const [services, setServices] = useState<{ id: string, name: string, price: string }[]>([
+        { id: '1', name: 'Physiotherapy', price: '' }
+    ]);
+
+    const availableServiceNames = [
         "Physiotherapy", "Chiropractic", "Massage Therapy",
         "Acupuncture", "Osteopathy", "Naturopathy", "Kinesiology"
     ];
 
-    const toggleService = (service: string) => {
-        setSelectedServices(prev =>
-            prev.includes(service)
-                ? prev.filter(s => s !== service)
-                : [...prev, service]
-        );
+    const addService = () => {
+        setServices(prev => [...prev, { id: Date.now().toString(), name: 'Physiotherapy', price: '' }]);
     };
+
+    const removeService = (id: string) => {
+        if (services.length > 1) {
+            setServices(prev => prev.filter(s => s.id !== id));
+        }
+    };
+
+    const updateService = (id: string, field: 'name' | 'price', value: string) => {
+        setServices(prev => prev.map(s => s.id === id ? { ...s, [field]: value } : s));
+    };
+
+    // Form logic: Check if all services have a valid price filled out
+    const isStep2Valid = services.every(s => s.price.trim() !== '');
 
     if (!isOpen) return null;
 
@@ -127,44 +140,80 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ isOpen, onClose }) => {
                         {step === 2 && (
                             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }} className="space-y-6">
                                 <div>
-                                    <label className="block text-sm font-bold text-gray-700 mb-2">Services Offered</label>
-                                    <p className="text-xs text-gray-500 mb-3">Select all that apply to your practice.</p>
-                                    <div className="flex flex-wrap gap-2">
-                                        {availableServices.map(service => {
-                                            const isSelected = selectedServices.includes(service);
-                                            return (
-                                                <button
-                                                    key={service}
-                                                    onClick={() => toggleService(service)}
-                                                    className={`px-4 py-2 rounded-full text-sm font-bold transition-all border 
-                                                        ${isSelected
-                                                            ? 'bg-[#00D46A] text-white border-[#00D46A] shadow-[0_0_10px_rgba(0,212,106,0.3)]'
-                                                            : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300 hover:bg-gray-50'
-                                                        }`}
+                                    <div className="flex items-center justify-between mb-2">
+                                        <label className="block text-sm font-bold text-gray-700">Services & Pricing</label>
+                                        <span className="text-xs font-bold text-[#00A852] bg-[#E8F5EE] px-2 py-0.5 rounded-full">{services.length} Added</span>
+                                    </div>
+                                    <p className="text-xs text-gray-500 mb-4">Add the services your practice offers and set your consultation prices.</p>
+
+                                    <div className="space-y-3">
+                                        <AnimatePresence>
+                                            {services.map((service, index) => (
+                                                <motion.div
+                                                    key={service.id}
+                                                    initial={{ opacity: 0, height: 0 }}
+                                                    animate={{ opacity: 1, height: 'auto' }}
+                                                    exit={{ opacity: 0, height: 0 }}
+                                                    className="flex items-start gap-3 bg-gray-50 p-3 rounded-xl border border-gray-100 relative group"
                                                 >
-                                                    {service}
-                                                </button>
-                                            );
-                                        })}
+                                                    <div className="flex-grow">
+                                                        <label className="block text-[10px] uppercase font-bold text-gray-500 mb-1 ml-1">Service Type</label>
+                                                        <div className="relative">
+                                                            <Activity className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={14} />
+                                                            <select
+                                                                value={service.name}
+                                                                onChange={(e) => updateService(service.id, 'name', e.target.value)}
+                                                                className="w-full pl-9 pr-4 py-2.5 rounded-lg border border-gray-200 focus:border-[#00D46A] focus:ring-0 outline-none transition-colors text-sm font-medium text-gray-900 bg-white appearance-none"
+                                                            >
+                                                                {availableServiceNames.map(name => (
+                                                                    <option key={name} value={name}>{name}</option>
+                                                                ))}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div className="w-1/3">
+                                                        <label className="block text-[10px] uppercase font-bold text-gray-500 mb-1 ml-1">Price</label>
+                                                        <div className="relative">
+                                                            <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={14} />
+                                                            <input
+                                                                type="number"
+                                                                value={service.price}
+                                                                onChange={(e) => updateService(service.id, 'price', e.target.value)}
+                                                                className="w-full pl-8 pr-3 py-2.5 rounded-lg border border-gray-200 focus:border-[#00D46A] focus:ring-0 outline-none transition-colors text-sm font-medium text-gray-900 bg-white"
+                                                                placeholder="e.g. 150"
+                                                            />
+                                                        </div>
+                                                    </div>
+
+                                                    {services.length > 1 && (
+                                                        <button
+                                                            onClick={() => removeService(service.id)}
+                                                            className="mt-6 p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors shrink-0"
+                                                            title="Remove Service"
+                                                        >
+                                                            <Trash2 size={18} />
+                                                        </button>
+                                                    )}
+                                                </motion.div>
+                                            ))}
+                                        </AnimatePresence>
+
+                                        <button
+                                            onClick={addService}
+                                            className="w-full py-3 mt-2 border-2 border-dashed border-gray-200 hover:border-[#00D46A] hover:bg-[#E8F5EE] text-gray-500 hover:text-[#00A852] rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-colors"
+                                        >
+                                            <Plus size={16} /> Add Another Service
+                                        </button>
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-2 gap-4">
-                                    <div>
-                                        <label className="block text-sm font-bold text-gray-700 mb-2">Consultation Price</label>
-                                        <div className="relative">
-                                            <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
-                                            <input type="number" className="w-full pl-12 pr-4 py-3.5 rounded-xl border-2 border-gray-100 focus:border-[#00D46A] focus:ring-0 outline-none transition-colors font-medium text-gray-900" placeholder="150" />
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-bold text-gray-700 mb-2">Modality</label>
-                                        <select className="w-full px-4 py-3.5 rounded-xl border-2 border-gray-100 focus:border-[#00D46A] focus:ring-0 outline-none transition-colors font-medium text-gray-900 bg-white">
-                                            <option>In-Clinic Only</option>
-                                            <option>Virtual Only</option>
-                                            <option>Hybrid (Both)</option>
-                                        </select>
-                                    </div>
+                                <div>
+                                    <label className="block text-sm font-bold text-gray-700 mb-2">Practice Modality</label>
+                                    <select className="w-full px-4 py-3.5 rounded-xl border-2 border-gray-100 focus:border-[#00D46A] focus:ring-0 outline-none transition-colors font-medium text-gray-900 bg-white">
+                                        <option>In-Clinic Only</option>
+                                        <option>Virtual Only</option>
+                                        <option>Hybrid (Both)</option>
+                                    </select>
                                 </div>
 
                                 <div>
@@ -273,7 +322,7 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ isOpen, onClose }) => {
                         {(step === 1 || step === 2) && (
                             <button
                                 onClick={handleNext}
-                                disabled={step === 2 && selectedServices.length === 0}
+                                disabled={step === 2 && !isStep2Valid}
                                 className="bg-[#00D46A] hover:bg-[#00A852] text-white px-8 py-3 rounded-full font-bold transition-all flex items-center gap-2 ml-auto disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 Continue <ChevronRight size={18} />
