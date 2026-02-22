@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronRight, CheckCircle2, Upload, User, MapPin, Clock, DollarSign, Activity, Award, Plus, Trash2 } from 'lucide-react';
+import { X, ChevronRight, CheckCircle2, Upload, User, MapPin, DollarSign, Activity, Award, Plus, Trash2 } from 'lucide-react';
 
 interface OnboardingFlowProps {
     isOpen: boolean;
@@ -12,18 +12,36 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ isOpen, onClose }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [agreed, setAgreed] = useState(false);
 
-    // Services state: array of objects with id, name, and price
-    const [services, setServices] = useState<{ id: string, name: string, price: string }[]>([
-        { id: '1', name: 'Physiotherapy', price: '' }
+    // Services state: array of objects with id, name, price, and optional customName
+    const [services, setServices] = useState<{ id: string, name: string, customName: string, price: string }[]>([
+        { id: '1', name: 'Physiotherapy', customName: '', price: '' }
     ]);
 
     const availableServiceNames = [
         "Physiotherapy", "Chiropractic", "Massage Therapy",
-        "Acupuncture", "Osteopathy", "Naturopathy", "Kinesiology"
+        "Acupuncture", "Osteopathy", "Naturopathy", "Kinesiology", "Other"
     ];
 
+    const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const [availability, setAvailability] = useState(
+        daysOfWeek.map(day => ({
+            day,
+            active: day !== 'Saturday' && day !== 'Sunday',
+            start: '09:00',
+            end: '17:00'
+        }))
+    );
+
+    const updateAvailability = (index: number, field: 'active' | 'start' | 'end', value: boolean | string) => {
+        setAvailability(prev => {
+            const newAvail = [...prev];
+            newAvail[index] = { ...newAvail[index], [field]: value };
+            return newAvail;
+        });
+    };
+
     const addService = () => {
-        setServices(prev => [...prev, { id: Date.now().toString(), name: 'Physiotherapy', price: '' }]);
+        setServices(prev => [...prev, { id: Date.now().toString(), name: 'Physiotherapy', customName: '', price: '' }]);
     };
 
     const removeService = (id: string) => {
@@ -32,12 +50,15 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ isOpen, onClose }) => {
         }
     };
 
-    const updateService = (id: string, field: 'name' | 'price', value: string) => {
+    const updateService = (id: string, field: 'name' | 'price' | 'customName', value: string) => {
         setServices(prev => prev.map(s => s.id === id ? { ...s, [field]: value } : s));
     };
 
-    // Form logic: Check if all services have a valid price filled out
-    const isStep2Valid = services.every(s => s.price.trim() !== '');
+    // Form logic: Check if all services have a valid price filled out, and if 'Other' is selected, customName is filled
+    const isStep2Valid = services.every(s =>
+        s.price.trim() !== '' &&
+        (s.name !== 'Other' || s.customName.trim() !== '')
+    );
 
     if (!isOpen) return null;
 
@@ -148,7 +169,7 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ isOpen, onClose }) => {
 
                                     <div className="space-y-3">
                                         <AnimatePresence>
-                                            {services.map((service, index) => (
+                                            {services.map(service => (
                                                 <motion.div
                                                     key={service.id}
                                                     initial={{ opacity: 0, height: 0 }}
@@ -156,7 +177,7 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ isOpen, onClose }) => {
                                                     exit={{ opacity: 0, height: 0 }}
                                                     className="flex items-start gap-3 bg-gray-50 p-3 rounded-xl border border-gray-100 relative group"
                                                 >
-                                                    <div className="flex-grow">
+                                                    <div className="flex-grow space-y-2">
                                                         <label className="block text-[10px] uppercase font-bold text-gray-500 mb-1 ml-1">Service Type</label>
                                                         <div className="relative">
                                                             <Activity className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={14} />
@@ -170,6 +191,15 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ isOpen, onClose }) => {
                                                                 ))}
                                                             </select>
                                                         </div>
+                                                        {service.name === 'Other' && (
+                                                            <input
+                                                                type="text"
+                                                                value={service.customName}
+                                                                onChange={(e) => updateService(service.id, 'customName', e.target.value)}
+                                                                placeholder="Enter custom service name"
+                                                                className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:border-[#00D46A] focus:ring-0 outline-none transition-colors text-sm font-medium text-gray-900 bg-white"
+                                                            />
+                                                        )}
                                                     </div>
                                                     <div className="w-1/3">
                                                         <label className="block text-[10px] uppercase font-bold text-gray-500 mb-1 ml-1">Price</label>
@@ -217,10 +247,43 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ isOpen, onClose }) => {
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-bold text-gray-700 mb-2">Hours of Availability</label>
-                                    <div className="relative">
-                                        <Clock className="absolute left-4 top-4 text-gray-400" size={18} />
-                                        <textarea className="w-full pl-12 pr-4 py-3.5 rounded-xl border-2 border-gray-100 focus:border-[#00D46A] focus:ring-0 outline-none transition-colors font-medium text-gray-900" rows={2} placeholder="Mon-Fri: 9am - 5pm..."></textarea>
+                                    <label className="block text-sm font-bold text-gray-700 mb-3">Hours of Availability</label>
+                                    <div className="space-y-2">
+                                        {availability.map((day, index) => (
+                                            <div key={day.day} className={`flex items-center justify-between p-3 rounded-xl border transition-colors ${day.active ? 'bg-white border-gray-200' : 'bg-gray-50 border-gray-100 opacity-70'}`}>
+                                                <div className="flex items-center gap-3 w-1/3">
+                                                    <div
+                                                        onClick={() => updateAvailability(index, 'active', !day.active)}
+                                                        className={`w-10 h-6 rounded-full p-1 cursor-pointer transition-colors flex shrink-0 ${day.active ? 'bg-[#00D46A]' : 'bg-gray-300'}`}
+                                                    >
+                                                        <div className={`w-4 h-4 rounded-full bg-white transition-transform ${day.active ? 'translate-x-4' : 'translate-x-0'}`} />
+                                                    </div>
+                                                    <span className={`text-sm font-bold ${day.active ? 'text-gray-900' : 'text-gray-500'}`}>{day.day.substring(0, 3)}</span>
+                                                </div>
+
+                                                {day.active ? (
+                                                    <div className="flex items-center gap-2 flex-grow justify-end">
+                                                        <input
+                                                            type="time"
+                                                            value={day.start}
+                                                            onChange={(e) => updateAvailability(index, 'start', e.target.value)}
+                                                            className="px-2 py-1.5 rounded-md border border-gray-200 text-sm font-medium text-gray-700 w-24 outline-none focus:border-[#00D46A]"
+                                                        />
+                                                        <span className="text-gray-400 text-sm">-</span>
+                                                        <input
+                                                            type="time"
+                                                            value={day.end}
+                                                            onChange={(e) => updateAvailability(index, 'end', e.target.value)}
+                                                            className="px-2 py-1.5 rounded-md border border-gray-200 text-sm font-medium text-gray-700 w-24 outline-none focus:border-[#00D46A]"
+                                                        />
+                                                    </div>
+                                                ) : (
+                                                    <div className="flex-grow flex justify-end">
+                                                        <span className="text-sm font-medium text-gray-400 italic">Not available</span>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        ))}
                                     </div>
                                 </div>
 
