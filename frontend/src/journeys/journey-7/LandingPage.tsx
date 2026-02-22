@@ -44,7 +44,7 @@ const LandingPage: React.FC = () => {
                             >
                                 <button
                                     onClick={() => setIsOnboardingOpen(true)}
-                                    className="w-full sm:w-auto px-8 py-4 rounded-full font-bold bg-[#00D46A] text-white hover:bg-[#00A852] transition-colors flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(0,212,106,0.3)] hover:shadow-[0_0_30px_rgba(0,212,106,0.5)] transform hover:-translate-y-1 duration-300"
+                                    className="w-full sm:w-auto px-8 py-4 rounded-full font-bold bg-[#00D46A] text-[#0A0F1E] hover:bg-[#00A852] transition-colors flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(0,212,106,0.3)] hover:shadow-[0_0_30px_rgba(0,212,106,0.5)] transform hover:-translate-y-1 duration-300"
                                 >
                                     Onboard in 5 Minutes <ArrowRight size={18} />
                                 </button>
