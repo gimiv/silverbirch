@@ -8,7 +8,7 @@ const PortalPage: React.FC = () => {
     const workflows = [
         {
             id: 'shopify-offer',
-            title: 'Client Example 1: Shopify Cart Offer',
+            title: 'Client Journey 1: Shopify Cart Offer',
             description: 'Post-purchase confirmation page with embedded Scale Health offer.',
             path: '/w/scale-health/offer',
             icon: <Activity className="text-brand-primary" size={24} />,
@@ -16,7 +16,7 @@ const PortalPage: React.FC = () => {
         },
         {
             id: 'scale-health',
-            title: 'Client Example 2: Scale Health Landing',
+            title: 'Client Journey 2: Scale Health Landing',
             description: 'Standard Scale Health landing page with intake flow.',
             path: '/w/scale-health/landing',
             icon: <Layout className="text-brand-primary" size={24} />,
@@ -24,7 +24,7 @@ const PortalPage: React.FC = () => {
         },
         {
             id: 'integrated-offer',
-            title: 'Client Example 3: Integrated Landing',
+            title: 'Client Journey 3: Integrated Landing',
             description: 'Landing page with Dr. Ho offer embedded (Reverted to Scheduler).',
             path: '/w/integrated-offer',
             icon: <Layout className="text-brand-primary" size={24} />,
@@ -32,7 +32,7 @@ const PortalPage: React.FC = () => {
         },
         {
             id: 'shopify-modal',
-            title: 'Client Example 4: Shopify Modal',
+            title: 'Client Journey 4: Shopify Modal',
             description: 'Shopify Cart Offer with "Talk to Expert" opening a modal intake flow.',
             path: '/w/shopify-modal',
             icon: <Activity className="text-brand-primary" size={24} />,
@@ -40,7 +40,7 @@ const PortalPage: React.FC = () => {
         },
         {
             id: 'insider',
-            title: 'Journey 5: The Insider Club',
+            title: 'Client Journey 5: The Insider Club',
             description: 'VIP Concierge flow with dynamic therapist carousel and priority booking.',
             path: '/w/insider',
             icon: <Layout className="text-brand-primary" size={24} />,
@@ -48,7 +48,7 @@ const PortalPage: React.FC = () => {
         },
         {
             id: 'journey-6',
-            title: 'Journey 6: Map Discovery',
+            title: 'Client Journey 6: Map Discovery',
             description: 'Interactive hero map connecting directly to specialized clinics.',
             path: '/w/journey-6',
             icon: <Activity className="text-brand-primary" size={24} />,
@@ -60,7 +60,7 @@ const PortalPage: React.FC = () => {
         <div className="min-h-screen bg-gray-50 font-sans p-8">
             <div className="max-w-5xl mx-auto">
                 <header className="mb-12 text-center">
-                    <h1 className="text-4xl font-display font-bold text-gray-900 mb-2">Client Examples</h1>
+                    <h1 className="text-4xl font-display font-bold text-gray-900 mb-2">Client Journeys</h1>
                     <p className="text-gray-600">Select a journey to preview.</p>
                 </header>
 
