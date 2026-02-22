@@ -33,11 +33,16 @@ const LoginPage: React.FC = () => {
                 className="bg-white rounded-3xl shadow-xl w-full max-w-sm overflow-hidden border border-gray-100"
             >
                 <div className="bg-[#050806] p-8 text-center">
-                    <img
-                        src="https://www.scalehealth.ca/assets/logo/scale-health_wordmark.svg"
-                        alt="Scale Health"
-                        className="h-8 mx-auto brightness-0 invert"
-                    />
+                    <div className="flex items-center gap-2.5">
+                        <img
+                            src="/logos/icon-mark-white.svg"
+                            alt="Scale Health Mark"
+                            className="h-7 md:h-8 w-auto shrink-0"
+                        />
+                        <span className="text-2xl font-display font-bold text-white tracking-tight">
+                            Scale<span className="text-[#00D46A]">Health</span>
+                        </span>
+                    </div>
                 </div>
 
                 <div className="p-8">

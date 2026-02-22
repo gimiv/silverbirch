@@ -31,11 +31,16 @@ const IntegratedLandingPage: React.FC = () => {
             {/* Header */}
             <header className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
                 <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-                    <img
-                        src="https://www.scalehealth.ca/assets/logo/scale-health_wordmark.svg"
-                        alt="Scale Health"
-                        className="h-8"
-                    />
+                    <div className="flex items-center gap-2.5">
+                        <img
+                            src="/logos/icon-mark-dark.svg"
+                            alt="Scale Health Mark"
+                            className="h-7 md:h-8 w-auto shrink-0"
+                        />
+                        <span className="text-2xl font-display font-bold text-[#0A0F1E] tracking-tight">
+                            Scale<span className="text-[#00D46A]">Health</span>
+                        </span>
+                    </div>
                     <a href="#schedule" className="hidden md:flex items-center gap-2 bg-[#51C580] text-white px-6 py-2.5 rounded-full font-bold hover:shadow-lg transition-all">
                         Schedule Now <ArrowRight size={18} />
                     </a>
@@ -179,11 +184,16 @@ const IntegratedLandingPage: React.FC = () => {
             <footer className="bg-[#050806] text-white py-12">
                 <div className="container mx-auto px-4">
                     <div className="flex flex-col md:flex-row justify-between items-center opacity-80">
-                        <img
-                            src="https://www.scalehealth.ca/assets/logo/scale-health_wordmark.svg"
-                            alt="Scale Health"
-                            className="h-8 brightness-0 invert mb-4 md:mb-0"
-                        />
+                        <div className="flex items-center gap-2.5 mb-4 md:mb-0">
+                            <img
+                                src="/logos/icon-mark-white.svg"
+                                alt="Scale Health Mark"
+                                className="h-7 md:h-8 w-auto shrink-0"
+                            />
+                            <span className="text-2xl font-display font-bold text-white tracking-tight">
+                                Scale<span className="text-[#00D46A]">Health</span>
+                            </span>
+                        </div>
                         <p className="text-sm text-gray-400">&copy; 2026 Scale Health. All rights reserved.</p>
                     </div>
                 </div>

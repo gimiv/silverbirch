@@ -119,8 +119,14 @@ const OfferPage: React.FC = () => {
                         {/* Content Side (Right Half of the Right Column) */}
                         <div className="md:w-1/2 p-6 md:p-8 flex flex-col justify-center relative">
                             <div className="flex items-center gap-2 mb-4">
-                                <span className="text-lg font-bold font-display text-gray-900">Scale Health</span>
-                                <div className="text-[#51C580] font-bold text-xl">+</div>
+                                <img
+                                    src="/logos/icon-mark-dark.svg"
+                                    alt="ScaleHealth Icon"
+                                    className="h-[28px] w-auto shrink-0"
+                                />
+                                <span className="text-[22px] font-display font-bold text-gray-900 tracking-tight leading-none">
+                                    Scale<span className="text-[#00D46A]">Health</span>
+                                </span>
                             </div>
 
                             <div className="flex items-center gap-2 mb-3 bg-red-50 border border-red-100 px-3 py-1.5 rounded-full w-fit">

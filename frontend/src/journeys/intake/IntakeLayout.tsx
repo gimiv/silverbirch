@@ -13,11 +13,16 @@ const IntakeLayout: React.FC<IntakeLayoutProps> = ({ children, currentStep, tota
         <div className="min-h-screen bg-[#F4FAF6] font-sans">
             {/* Minimal Header */}
             <header className="bg-white border-b border-gray-100 h-20 flex items-center justify-center sticky top-0 z-10">
-                <img
-                    src="https://www.scalehealth.ca/assets/logo/scale-health_wordmark.svg"
-                    alt="Scale Health"
-                    className="h-8"
-                />
+                <div className="flex items-center gap-2.5">
+                    <img
+                        src="/logos/icon-mark-dark.svg"
+                        alt="Scale Health Mark"
+                        className="h-7 md:h-8 w-auto shrink-0"
+                    />
+                    <span className="text-2xl font-display font-bold text-[#0A0F1E] tracking-tight">
+                        Scale<span className="text-[#00D46A]">Health</span>
+                    </span>
+                </div>
             </header>
 
             {/* Progress Bar */}

@@ -11,13 +11,19 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="min-h-screen flex flex-col font-sans">
             <header className="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
                 <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-                    <Link to="/" className="flex items-center">
-                        <img
-                            src="https://www.scalehealth.ca/assets/logo/scale-health_wordmark.svg"
-                            alt="Scale Health"
-                            className="h-12 md:h-16"
-                        />
-                    </Link>
+                    {/* Logo Section */}
+                    <div className="flex justify-start w-48">
+                        <Link to="/" className="flex items-center gap-2 transition-opacity hover:opacity-80">
+                            <img
+                                src="/logos/icon-mark-dark.svg"
+                                alt="ScaleHealth Icon"
+                                className="h-[28px] w-auto shrink-0"
+                            />
+                            <span className="text-[22px] font-display font-bold text-gray-900 tracking-tight leading-none">
+                                Scale<span className="text-[#00D46A]">Health</span>
+                            </span>
+                        </Link>
+                    </div>
                     <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
                         <Link to="#" className="hover:text-brand-primary transition-colors">Treatments</Link>
                         <Link to="#" className="hover:text-brand-primary transition-colors">Specialists</Link>
@@ -36,11 +42,16 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <footer className="bg-brand-dark text-white py-12">
                 <div className="container mx-auto px-4 grid md:grid-cols-4 gap-8">
                     <div>
-                        <img
-                            src="https://www.scalehealth.ca/assets/logo/scale-health_wordmark.svg"
-                            alt="Scale Health"
-                            className="h-8 mb-4 brightness-0 invert"
-                        />
+                        <Link to="/" className="flex items-center gap-2.5 mb-6 md:mb-0">
+                            <img
+                                src="/logos/icon-mark-green.svg"
+                                alt="Scale Health Mark"
+                                className="h-7 md:h-8 w-auto shrink-0"
+                            />
+                            <span className="text-2xl font-display font-bold text-white tracking-tight">
+                                Scale<span className="text-[#00D46A]">Health</span>
+                            </span>
+                        </Link>
                         <p className="text-gray-400 text-sm">
                             Your partner in holistic wellness and recovery.
                         </p>

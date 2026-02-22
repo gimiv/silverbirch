@@ -45,6 +45,14 @@ const PortalPage: React.FC = () => {
             path: '/w/insider',
             icon: <Layout className="text-brand-primary" size={24} />,
             status: 'New'
+        },
+        {
+            id: 'journey-6',
+            title: 'Journey 6: Map Discovery',
+            description: 'Interactive hero map connecting directly to specialized clinics.',
+            path: '/w/journey-6',
+            icon: <Activity className="text-brand-primary" size={24} />,
+            status: 'New'
         }
     ];
 

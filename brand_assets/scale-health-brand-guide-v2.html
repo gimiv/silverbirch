@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ScaleHealth — Brand Style Guide v2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* Light-primary palette */
+  --white:#FFFFFF;
+  --snow:#F8FAFB;
+  --mist:#F0F7F4;
+  --ice:#E8F5EE;
+  --rule-light:rgba(10,15,30,0.08);
+  --rule-mid:rgba(10,15,30,0.12);
+
+  /* Brand colors */
+  --green:#00A852;        /* primary — on light */
+  --green-bright:#00D46A; /* secondary — on dark */
+  --green-pale:#E8F5EE;   /* tint */
+  --green-hover:#008F44;
+
+  /* Dark/text */
+  --ink:#0A0F1E;
+  --ink-soft:#1C2340;
+  --slate:#4A5568;
+  --muted:#8A94AA;
+
+  /* Dark mode surface (secondary) */
+  --dark-bg:#0A0F1E;
+  --dark-card:#1C2340;
+  --dark-rule:rgba(255,255,255,0.08);
+
+  /* Data */
+  --blue:#0057FF;
+
+  --r:12px;
+  --fh:'Poppins',sans-serif;
+  --fb:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.08),0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:0 4px 16px rgba(0,0,0,0.08),0 2px 6px rgba(0,0,0,0.04);
+  --shadow-lg:0 12px 40px rgba(0,0,0,0.1),0 4px 12px rgba(0,0,0,0.06);
+}
+
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--white);color:var(--ink);font-size:15px;line-height:1.6}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,0.95);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--rule-light);
+  box-shadow:var(--shadow-sm);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:60px;
+}
+.nb{font-family:var(--fh);font-weight:800;font-size:18px;letter-spacing:-.04em;line-height:1}
+.nb .h{color:var(--green)}
+.nb .sep{color:var(--muted);font-weight:400;margin:0 10px;font-size:14px}
+.nb .tag{font-size:11px;font-weight:600;background:var(--green-pale);color:var(--green);padding:3px 8px;border-radius:100px;letter-spacing:.04em;margin-left:8px;vertical-align:middle}
+.nl{display:flex;gap:28px}
+.nl a{font-size:12px;color:var(--slate);text-decoration:none;font-weight:500;letter-spacing:.02em;transition:color .15s;padding:4px 0;border-bottom:2px solid transparent}
+.nl a:hover{color:var(--ink);border-bottom-color:var(--green)}
+
+/* ── HERO ── */
+.hero{
+  max-width:1100px;margin:0 auto;padding:96px 52px 80px;
+  background:linear-gradient(160deg, var(--white) 0%, var(--mist) 60%, var(--ice) 100%);
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:-120px;right:-80px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle, rgba(0,168,82,0.08) 0%, transparent 70%);
+  pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;bottom:-60px;left:20%;
+  width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle, rgba(0,168,82,0.05) 0%, transparent 70%);
+  pointer-events:none;
+}
+.pill{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--green-pale);border:1px solid rgba(0,168,82,0.2);
+  border-radius:100px;padding:6px 14px;
+  font-size:11px;font-weight:600;color:var(--green);
+  letter-spacing:.07em;text-transform:uppercase;margin-bottom:32px;
+  position:relative;z-index:1;
+}
+.pill::before{content:'';width:6px;height:6px;background:var(--green);border-radius:50%}
+h1{
+  font-family:var(--fh);font-size:clamp(44px,6.5vw,84px);
+  font-weight:800;line-height:1.0;letter-spacing:-.04em;
+  margin-bottom:24px;position:relative;z-index:1;
+  color:var(--ink);
+}
+h1 em{color:var(--green);font-style:normal}
+.hero-sub{font-size:18px;color:var(--slate);max-width:540px;line-height:1.7;font-weight:300;position:relative;z-index:1}
+.hero-meta{
+  display:flex;gap:32px;margin-top:40px;padding-top:32px;
+  border-top:1px solid var(--rule-light);position:relative;z-index:1;
+}
+.hm-item .hm-val{font-family:var(--fh);font-size:28px;font-weight:800;color:var(--green);letter-spacing:-.03em}
+.hm-item .hm-lbl{font-size:12px;color:var(--muted);font-weight:500;margin-top:2px}
+
+/* ── SECTIONS ── */
+section{max-width:1100px;margin:0 auto;padding:64px 52px;border-top:1px solid var(--rule-light)}
+.ey{font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
+h2{font-family:var(--fh);font-size:clamp(28px,3.5vw,40px);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:40px;color:var(--ink)}
+.sh{font-family:var(--fh);font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;margin-bottom:16px;margin-top:40px}
+.sh:first-of-type{margin-top:0}
+
+/* ── LOGO PANELS ── */
+.logo-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.lp{border-radius:var(--r);padding:48px 40px 32px;display:flex;flex-direction:column;transition:box-shadow .2s}
+.lp:hover{box-shadow:var(--shadow-md)}
+
+/* Light backgrounds (primary) */
+.lp.white{background:#fff;border:1px solid var(--rule-mid)}
+.lp.snow{background:var(--snow);border:1px solid var(--rule-light)}
+.lp.mist{background:var(--mist);border:1px solid rgba(0,168,82,0.15)}
+.lp.ice{background:var(--ice);border:1px solid rgba(0,168,82,0.2)}
+.lp.green-bg{background:var(--green);border:1px solid var(--green)}
+
+/* Dark backgrounds (secondary) */
+.lp.dark{background:var(--dark-bg);border:1px solid var(--dark-bg)}
+.lp.navy{background:var(--dark-card);border:1px solid #2A3560}
+
+/* Transparent checkerboard */
+.lp.transp-lt{background:repeating-conic-gradient(#E8EBF0 0% 25%,#F4F6FA 0% 50%) 0 0/20px 20px;border:1px solid #E0E4EC}
+.lp.transp-dk{background:repeating-conic-gradient(#1C2340 0% 25%,#0A0F1E 0% 50%) 0 0/20px 20px;border:1px solid #2A3560}
+.lp.s2{grid-column:span 2}
+
+.wm{font-family:var(--fh);font-weight:800;letter-spacing:-.04em;line-height:1;white-space:nowrap}
+.lp-label{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-top:16px;opacity:.45}
+.lp.white .lp-label,.lp.snow .lp-label,.lp.mist .lp-label,.lp.ice .lp-label,.lp.transp-lt .lp-label{color:var(--ink)}
+.lp.green-bg .lp-label{color:rgba(10,15,30,.6)}
+.lp.dark .lp-label,.lp.navy .lp-label,.lp.transp-dk .lp-label{color:rgba(255,255,255,.5)}
+
+/* Size scale */
+.size-scale{
+  background:var(--snow);border:1px solid var(--rule-light);border-radius:var(--r);
+  padding:32px 36px;display:flex;flex-direction:column;gap:20px;margin-bottom:36px;
+  box-shadow:var(--shadow-sm);
+}
+
+/* Icon marks */
+.icon-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:4px}
+.ib{border-radius:14px;padding:18px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm);transition:box-shadow .2s}
+.ib:hover{box-shadow:var(--shadow-md)}
+.ib.iw{background:#fff;border:1px solid var(--rule-mid)}
+.ib.ig{background:var(--green)}
+.ib.id{background:var(--dark-bg)}
+.ib.im{background:var(--mist);border:1px solid rgba(0,168,82,.15)}
+.ib.it{background:repeating-conic-gradient(#E8EBF0 0% 25%,#F4F6FA 0% 50%) 0 0/16px 16px;border:1px solid #E0E4EC}
+.ib.sm{border-radius:8px;padding:11px}
+
+/* ── COLORS ── */
+.color-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px}
+.cc{border-radius:var(--r);overflow:hidden;border:1px solid var(--rule-light);box-shadow:var(--shadow-sm)}
+.csw{height:88px}
+.ci{padding:14px;background:var(--white)}
+.cn{font-family:var(--fh);font-weight:700;font-size:14px;margin-bottom:3px;color:var(--ink)}
+.ch{font-size:11px;color:var(--muted);font-family:'Courier New',monospace;letter-spacing:.02em}
+.cr4{font-size:10px;color:var(--muted);margin-top:5px;text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+
+.usage-bar{display:flex;border-radius:8px;overflow:hidden;height:44px;margin-top:24px;margin-bottom:10px;box-shadow:var(--shadow-sm)}
+.ub-seg{display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;letter-spacing:.04em}
+.usage-labels{display:flex;gap:20px;flex-wrap:wrap;margin-top:10px}
+.ul-item{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--slate)}
+.ul-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+/* ── TYPOGRAPHY ── */
+.type-block{border-bottom:1px solid var(--rule-light)}.type-block:last-child{border-bottom:none}
+.tr3{display:grid;grid-template-columns:150px 1fr;gap:28px;align-items:center;padding:28px 0}
+.tn{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
+.tu{font-size:11px;color:var(--muted);opacity:.7;line-height:1.5}
+.t-d{font-family:var(--fh);font-size:52px;font-weight:800;letter-spacing:-.04em;line-height:1;color:var(--ink)}
+.t-h1{font-family:var(--fh);font-size:36px;font-weight:800;letter-spacing:-.035em;line-height:1.05;color:var(--ink)}
+.t-h2{font-family:var(--fh);font-size:26px;font-weight:800;letter-spacing:-.025em;color:var(--ink)}
+.t-h3{font-family:var(--fh);font-size:19px;font-weight:700;letter-spacing:-.015em;color:var(--ink)}
+.t-b{font-size:15px;font-weight:300;color:var(--slate);line-height:1.75;max-width:460px}
+.t-sm{font-size:12px;font-weight:500;color:var(--muted)}
+.t-lbl{font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.11em}
+
+/* ── COMPONENTS ── */
+.comp-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:10px}
+
+.btn-p{
+  background:var(--green);color:#fff;font-family:var(--fb);font-weight:600;font-size:14px;
+  padding:13px 26px;border-radius:8px;border:none;cursor:pointer;letter-spacing:-.01em;
+  box-shadow:0 2px 8px rgba(0,168,82,0.3);transition:all .15s;
+}
+.btn-p:hover{background:var(--green-hover);box-shadow:0 4px 16px rgba(0,168,82,0.35);transform:translateY(-1px)}
+.btn-s{
+  background:#fff;color:var(--ink);font-family:var(--fb);font-weight:500;font-size:14px;
+  padding:12px 26px;border-radius:8px;border:1px solid var(--rule-mid);
+  cursor:pointer;box-shadow:var(--shadow-sm);transition:all .15s;
+}
+.btn-s:hover{border-color:var(--green);color:var(--green);box-shadow:var(--shadow-md)}
+.btn-g{
+  background:transparent;color:var(--green);font-family:var(--fb);font-weight:600;font-size:14px;
+  padding:12px 0;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;
+}
+.btn-g::after{content:'→';transition:transform .15s}.btn-g:hover::after{transform:translateX(4px)}
+
+.badge{display:inline-flex;align-items:center;gap:5px;padding:4px 11px;border-radius:100px;font-size:11px;font-weight:600}
+.bgg{background:var(--green-pale);color:var(--green);border:1px solid rgba(0,168,82,.2)}
+.bgb{background:rgba(0,87,255,.08);color:var(--blue);border:1px solid rgba(0,87,255,.18)}
+.bgk{background:var(--snow);color:var(--slate);border:1px solid var(--rule-mid)}
+
+.card-ex{
+  background:#fff;border:1px solid var(--rule-light);border-radius:14px;padding:24px;
+  max-width:290px;box-shadow:var(--shadow-md);
+}
+.ce-t{font-family:var(--fh);font-weight:700;font-size:17px;margin:12px 0 8px;letter-spacing:-.02em;color:var(--ink)}
+.ce-d{font-size:13px;font-weight:300;color:var(--slate);line-height:1.65;margin-bottom:18px}
+.ce-s{font-family:var(--fh);font-size:34px;font-weight:800;color:var(--green);letter-spacing:-.04em}
+.ce-sl{font-size:11px;color:var(--muted);margin-top:2px;font-weight:500}
+.iw{display:flex;flex-direction:column;gap:6px;max-width:250px}
+.il{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
+.inp{
+  background:#fff;border:1px solid var(--rule-mid);border-radius:8px;
+  padding:12px 15px;font-family:var(--fb);font-size:14px;color:var(--ink);
+  outline:none;transition:border .15s,box-shadow .15s;width:100%;
+  box-shadow:var(--shadow-sm);
+}
+.inp:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(0,168,82,.12)}
+.inp::placeholder{color:var(--muted);opacity:.7}
+
+/* ── DARK MODE PREVIEW ── */
+.dark-preview{
+  background:var(--dark-bg);border-radius:16px;padding:40px;margin-top:0;
+  border:1px solid var(--dark-rule);
+}
+.dark-preview .wm{display:inline-block;margin-bottom:20px}
+
+/* ── MOTION ── */
+.md2{
+  background:var(--snow);border:1px solid var(--rule-light);border-radius:var(--r);
+  padding:36px;display:flex;gap:48px;flex-wrap:wrap;align-items:center;
+  box-shadow:var(--shadow-sm);
+}
+.mdl{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;margin-bottom:16px}
+.pdot{width:11px;height:11px;background:var(--green);border-radius:50%;animation:pa 2s ease-in-out infinite}
+@keyframes pa{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.8);opacity:.3}}
+.br{font-family:var(--fh);font-weight:700;font-size:22px;color:var(--green);letter-spacing:-.02em;animation:ba 1.8s ease-in-out infinite alternate}
+@keyframes ba{from{opacity:.2}to{opacity:1}}
+.fl{
+  background:var(--green);color:#fff;padding:11px 20px;border-radius:8px;
+  font-weight:600;font-size:13px;
+  box-shadow:0 4px 12px rgba(0,168,82,.3);
+  animation:fa .9s ease-in-out infinite alternate;display:inline-block;
+}
+@keyframes fa{from{transform:translateY(4px);opacity:.8}to{transform:translateY(-4px);opacity:1}}
+
+/* ── SPACING ── */
+.sp-row{display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap;margin-top:24px}
+.sp-item{display:flex;flex-direction:column;align-items:center;gap:8px}
+.sp-block{background:rgba(0,168,82,.12);border:1px dashed rgba(0,168,82,.35);border-radius:4px;width:52px}
+.sp-lbl{font-size:10px;color:var(--muted);text-align:center;font-weight:600;line-height:1.5}
+
+/* ── VOICE ── */
+.pg{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:24px}
+.pc{background:var(--snow);border:1px solid var(--rule-light);border-radius:var(--r);padding:24px;box-shadow:var(--shadow-sm)}
+.pc .pi{font-size:26px;margin-bottom:12px}
+.pc .pt{font-family:var(--fh);font-weight:700;font-size:15px;margin-bottom:7px;letter-spacing:-.01em;color:var(--ink)}
+.pc .pd{font-size:13px;font-weight:300;color:var(--slate);line-height:1.65}
+.vg{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.vc{background:var(--snow);border:1px solid var(--rule-light);border-radius:var(--r);padding:24px;box-shadow:var(--shadow-sm)}
+.vc.do{border-top:3px solid var(--green)}.vc.dt{border-top:3px solid #E53E3E}
+.vh{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px}
+.vc.do .vh{color:var(--green)}.vc.dt .vh{color:#E53E3E}
+.vi{font-size:13px;font-weight:300;color:var(--slate);line-height:1.65;padding:9px 0;border-bottom:1px solid var(--rule-light);display:flex;gap:9px}
+.vi:last-child{border-bottom:none;padding-bottom:0}
+.vc.do .vi::before{content:'✓';color:var(--green);font-size:11px;margin-top:3px;flex-shrink:0;font-weight:700}
+.vc.dt .vi::before{content:'✗';color:#E53E3E;font-size:11px;margin-top:3px;flex-shrink:0;font-weight:700}
+
+/* ── UTIL ── */
+.note{margin-top:20px;padding:18px 22px;background:var(--green-pale);border:1px solid rgba(0,168,82,.18);border-radius:10px;font-size:13px;font-weight:300;color:var(--slate);line-height:1.75}
+.box{margin-top:20px;padding:18px 22px;background:var(--snow);border:1px solid var(--rule-light);border-radius:10px;font-size:13px;font-weight:300;color:var(--slate);line-height:1.75;box-shadow:var(--shadow-sm)}
+strong.g{color:var(--green)}strong.k{color:var(--ink)}
+.divider-label{display:flex;align-items:center;gap:12px;margin:32px 0 20px;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.09em}
+.divider-label::before,.divider-label::after{content:'';flex:1;height:1px;background:var(--rule-light)}
+
+/* ── FOOTER ── */
+footer{
+  max-width:1100px;margin:0 auto;padding:48px 52px;border-top:1px solid var(--rule-light);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;
+}
+.fb2{font-family:var(--fh);font-weight:800;font-size:16px;letter-spacing:-.04em;color:var(--ink)}
+.fb2 .h{color:var(--green)}
+footer p{font-size:12px;color:var(--muted)}
+
+@media(max-width:640px){
+  .logo-grid,.vg{grid-template-columns:1fr}.lp.s2{grid-column:span 1}
+  .tr3{grid-template-columns:1fr}
+  section,.hero,footer{padding-left:20px;padding-right:20px}
+  nav{padding:0 20px}.nl{display:none}
+  .hero-meta{gap:20px;flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nb">Scale<span class="h">Health</span><span class="sep">/</span>Brand Guide <span class="tag">v2.0</span></div>
+  <div class="nl">
+    <a href="#logo">Logo</a>
+    <a href="#colors">Colors</a>
+    <a href="#type">Typography</a>
+    <a href="#components">Components</a>
+    <a href="#motion">Motion</a>
+    <a href="#voice">Voice</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="pill">Brand Style Guide · Light-First · v2.0</div>
+  <h1>Built for <em>trust.</em><br>Designed for growth.</h1>
+  <p class="hero-sub">Scale Health drives consumer traffic to health providers. The brand needs to earn trust in seconds — clean, clinical, credible — while still projecting the authority of an AI-first growth platform.</p>
+  <div class="hero-meta">
+    <div class="hm-item"><div class="hm-val">$120K+</div><div class="hm-lbl">Gross profit, year one</div></div>
+    <div class="hm-item"><div class="hm-val">5×</div><div class="hm-lbl">Average revenue growth</div></div>
+    <div class="hm-item"><div class="hm-val">37%</div><div class="hm-lbl">Conversion lift</div></div>
+  </div>
+</div>
+
+<!-- 01 LOGO -->
+<section id="logo">
+  <div class="ey">01 — Logo System</div>
+  <h2>Identity Mark</h2>
+
+  <!-- Primary: light backgrounds -->
+  <div class="logo-grid">
+    <div class="lp white s2">
+      <div class="wm" style="font-size:58px"><span style="color:#0A0F1E">Scale</span><span style="color:#00A852">Health</span></div>
+      <div class="lp-label">Primary — White Background</div>
+    </div>
+    <div class="lp snow">
+      <div class="wm" style="font-size:38px"><span style="color:#0A0F1E">Scale</span><span style="color:#00A852">Health</span></div>
+      <div class="lp-label">On Snow / Off-White</div>
+    </div>
+    <div class="lp mist">
+      <div class="wm" style="font-size:38px"><span style="color:#0A0F1E">Scale</span><span style="color:#00A852">Health</span></div>
+      <div class="lp-label">On Mint Mist</div>
+    </div>
+    <div class="lp ice">
+      <div class="wm" style="font-size:38px"><span style="color:#0A0F1E">Scale</span><span style="color:#00A852">Health</span></div>
+      <div class="lp-label">On Ice — lightest tint</div>
+    </div>
+    <div class="lp green-bg">
+      <div class="wm" style="font-size:38px"><span style="color:#fff">Scale</span><span style="color:rgba(255,255,255,.6)">Health</span></div>
+      <div class="lp-label">On Vitality Green — use sparingly</div>
+    </div>
+  </div>
+
+  <!-- Transparent variants -->
+  <div class="divider-label">Transparent Variants</div>
+  <div class="logo-grid">
+    <div class="lp transp-lt">
+      <div class="wm" style="font-size:38px"><span style="color:#0A0F1E">Scale</span><span style="color:#00A852">Health</span></div>
+      <div class="lp-label">Transparent — light backgrounds</div>
+    </div>
+    <div class="lp transp-dk">
+      <div class="wm" style="font-size:38px"><span style="color:#fff">Scale</span><span style="color:#00D46A">Health</span></div>
+      <div class="lp-label">Transparent — dark backgrounds</div>
+    </div>
+  </div>
+
+  <!-- Secondary: dark backgrounds -->
+  <div class="divider-label">Secondary — Operator &amp; Dashboard Contexts</div>
+  <div class="logo-grid">
+    <div class="lp dark">
+      <div class="wm" style="font-size:38px"><span style="color:#fff">Scale</span><span style="color:#00D46A">Health</span></div>
+      <div class="lp-label">Deep Ink — dashboards, dark mode</div>
+    </div>
+    <div class="lp navy">
+      <div class="wm" style="font-size:38px"><span style="color:#fff">Scale</span><span style="color:#00D46A">Health</span></div>
+      <div class="lp-label">Navy — operator nav / footer</div>
+    </div>
+  </div>
+
+  <!-- Size scale -->
+  <div class="sh">Size Scale</div>
+  <div class="size-scale">
+    <div class="wm" style="font-size:56px"><span style="color:#0A0F1E">Scale</span><span style="color:#00A852">Health</span></div>
+    <div class="wm" style="font-size:40px"><span style="color:#0A0F1E">Scale</span><span style="color:#00A852">Health</span></div>
+    <div class="wm" style="font-size:28px"><span style="color:#0A0F1E">Scale</span><span style="color:#00A852">Health</span></div>
+    <div class="wm" style="font-size:18px"><span style="color:#0A0F1E">Scale</span><span style="color:#00A852">Health</span></div>
+    <div class="wm" style="font-size:14px"><span style="color:#0A0F1E">Scale</span><span style="color:#00A852">Health</span></div>
+    <p style="font-size:11px;color:var(--muted)">Minimum: 14px. Below this, use the icon mark only.</p>
+  </div>
+
+  <!-- Icon marks -->
+  <div class="sh">Icon Mark — Favicon &amp; App Icon</div>
+  <div class="icon-row">
+    <div class="ib iw">
+      <svg width="52" height="52" viewBox="0 0 200 200" fill="none"><rect width="200" height="200" rx="40" fill="#fff" stroke="#E8EBF0"/><rect x="84" y="20" width="32" height="160" rx="16" fill="#00A852"/><rect x="20" y="84" width="160" height="32" rx="16" fill="#00A852"/></svg>
+    </div>
+    <div class="ib im">
+      <svg width="44" height="44" viewBox="0 0 200 200" fill="none"><rect width="200" height="200" rx="40" fill="#F0F7F4"/><rect x="84" y="20" width="32" height="160" rx="16" fill="#00A852"/><rect x="20" y="84" width="160" height="32" rx="16" fill="#00A852"/></svg>
+    </div>
+    <div class="ib ig">
+      <svg width="44" height="44" viewBox="0 0 200 200" fill="none"><rect width="200" height="200" rx="40" fill="#00D46A"/><rect x="84" y="20" width="32" height="160" rx="16" fill="#0A0F1E"/><rect x="20" y="84" width="160" height="32" rx="16" fill="#0A0F1E"/></svg>
+    </div>
+    <div class="ib id">
+      <svg width="44" height="44" viewBox="0 0 200 200" fill="none"><rect width="200" height="200" rx="40" fill="#0A0F1E"/><rect x="84" y="20" width="32" height="160" rx="16" fill="#00D46A"/><rect x="20" y="84" width="160" height="32" rx="16" fill="#00D46A"/></svg>
+    </div>
+    <div class="ib it">
+      <svg width="44" height="44" viewBox="0 0 160 160" fill="none"><rect x="64" y="0" width="32" height="160" rx="16" fill="#00A852"/><rect x="0" y="64" width="160" height="32" rx="16" fill="#00A852"/></svg>
+    </div>
+    <div class="ib iw sm">
+      <svg width="22" height="22" viewBox="0 0 200 200" fill="none"><rect width="200" height="200" rx="40" fill="#fff"/><rect x="84" y="20" width="32" height="160" rx="16" fill="#00A852"/><rect x="20" y="84" width="160" height="32" rx="16" fill="#00A852"/></svg>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong class="g">Primary:</strong> White/light backgrounds with deep ink "Scale" + forest green "Health". This is consumer-facing — trust and legibility first.<br><br>
+    <strong class="g">Secondary:</strong> Dark variants for operator dashboards, B2B sales materials, and internal tools. Same wordmark, flipped for dark surfaces with brighter green.<br><br>
+    <strong class="g">Font:</strong> Poppins 800 — used identically in this guide and all exported file assets.
+  </div>
+</section>
+
+<!-- 02 COLORS -->
+<section id="colors">
+  <div class="ey">02 — Color System</div>
+  <h2>Color Palette</h2>
+
+  <div class="divider-label">Primary — Light Surfaces</div>
+  <div class="color-grid">
+    <div class="cc"><div class="csw" style="background:#FFFFFF;border-bottom:1px solid #E8EBF0"></div><div class="ci"><div class="cn">White</div><div class="ch">#FFFFFF</div><div class="cr4">Primary BG</div></div></div>
+    <div class="cc"><div class="csw" style="background:#F8FAFB;border-bottom:1px solid #E8EBF0"></div><div class="ci"><div class="cn">Snow</div><div class="ch">#F8FAFB</div><div class="cr4">Cards / Sections</div></div></div>
+    <div class="cc"><div class="csw" style="background:#F0F7F4;border-bottom:1px solid #D4EDDF"></div><div class="ci"><div class="cn">Mist</div><div class="ch">#F0F7F4</div><div class="cr4">Green-tinted BG</div></div></div>
+    <div class="cc"><div class="csw" style="background:#E8F5EE;border-bottom:1px solid #C8E6D4"></div><div class="ci"><div class="cn">Ice</div><div class="ch">#E8F5EE</div><div class="cr4">Pill / Badge BG</div></div></div>
+  </div>
+
+  <div class="divider-label" style="margin-top:24px">Brand Accent</div>
+  <div class="color-grid">
+    <div class="cc"><div class="csw" style="background:#00A852"></div><div class="ci"><div class="cn">Forest</div><div class="ch">#00A852</div><div class="cr4">Primary Green (light)</div></div></div>
+    <div class="cc"><div class="csw" style="background:#008F44"></div><div class="ci"><div class="cn">Forest Deep</div><div class="ch">#008F44</div><div class="cr4">Hover / Pressed</div></div></div>
+    <div class="cc"><div class="csw" style="background:#00D46A"></div><div class="ci"><div class="cn">Vitality</div><div class="ch">#00D46A</div><div class="cr4">On Dark Only</div></div></div>
+    <div class="cc"><div class="csw" style="background:#0057FF"></div><div class="ci"><div class="cn">Pulse Blue</div><div class="ch">#0057FF</div><div class="cr4">Data / Charts</div></div></div>
+  </div>
+
+  <div class="divider-label" style="margin-top:24px">Text & Dark Surfaces</div>
+  <div class="color-grid">
+    <div class="cc"><div class="csw" style="background:#0A0F1E"></div><div class="ci"><div class="cn">Deep Ink</div><div class="ch">#0A0F1E</div><div class="cr4">Headlines / Dark BG</div></div></div>
+    <div class="cc"><div class="csw" style="background:#1C2340"></div><div class="ci"><div class="cn">Navy</div><div class="ch">#1C2340</div><div class="cr4">Dark Cards</div></div></div>
+    <div class="cc"><div class="csw" style="background:#4A5568"></div><div class="ci"><div class="cn">Slate</div><div class="ch">#4A5568</div><div class="cr4">Body Text</div></div></div>
+    <div class="cc"><div class="csw" style="background:#8A94AA"></div><div class="ci"><div class="cn">Muted</div><div class="ch">#8A94AA</div><div class="cr4">Captions / Labels</div></div></div>
+  </div>
+
+  <div style="margin-top:28px">
+    <div class="usage-bar">
+      <div class="ub-seg" style="width:75%;background:#F8FAFB;color:var(--muted);border:1px solid var(--rule-light)">75% White / Snow surfaces</div>
+      <div class="ub-seg" style="width:15%;background:#00A852;color:#fff">15% Green</div>
+      <div class="ub-seg" style="width:10%;background:#0A0F1E;color:rgba(255,255,255,.7);font-size:10px">10% Ink</div>
+    </div>
+    <div class="usage-labels">
+      <div class="ul-item"><div class="ul-dot" style="background:#F8FAFB;border:1px solid #E0E4EC"></div>75% White/Snow — primary canvas</div>
+      <div class="ul-item"><div class="ul-dot" style="background:#00A852"></div>15% Forest Green — CTAs, accents, wordmark</div>
+      <div class="ul-item"><div class="ul-dot" style="background:#0A0F1E"></div>10% Deep Ink — headlines, operator surfaces</div>
+    </div>
+  </div>
+  <div class="box">Consumer-facing surfaces are always light. Deep Ink is used for text hierarchy and secondary B2B/operator contexts — not as a primary background for patient-facing pages.</div>
+</section>
+
+<!-- 03 TYPOGRAPHY -->
+<section id="type">
+  <div class="ey">03 — Typography</div>
+  <h2>Type System</h2>
+  <div>
+    <div class="type-block"><div class="tr3"><div><div class="tn">Display</div><div class="tu">Poppins · 800<br>Wordmark + hero</div></div><div class="t-d">Aa Bb 01</div></div></div>
+    <div class="type-block"><div class="tr3"><div><div class="tn">H1 Hero</div><div class="tu">Poppins 800<br>56–84px · −0.04em</div></div><div class="t-h1">Scale Your Health Business 5×</div></div></div>
+    <div class="type-block"><div class="tr3"><div><div class="tn">H2 Section</div><div class="tu">Poppins 800<br>32–48px · −0.03em</div></div><div class="t-h2">AI-Powered Patient Acquisition</div></div></div>
+    <div class="type-block"><div class="tr3"><div><div class="tn">H3 Card</div><div class="tu">Poppins 700<br>18–24px · −0.015em</div></div><div class="t-h3">37% Higher Conversion Rate</div></div></div>
+    <div class="type-block"><div class="tr3"><div><div class="tn">Body</div><div class="tu">DM Sans 300<br>15px · 1.75lh</div></div><div class="t-b">We connect health-conscious consumers with qualified providers — handling lead generation, qualification, and nurturing 24/7 so your clinic grows without adding headcount.</div></div></div>
+    <div class="type-block"><div class="tr3"><div><div class="tn">Small</div><div class="tu">DM Sans 500<br>12–13px</div></div><div class="t-sm">Done-with-you · Toronto, ON · info@scalehealth.ca</div></div></div>
+    <div class="type-block"><div class="tr3"><div><div class="tn">Label</div><div class="tu">DM Sans 700<br>11px · ALL CAPS</div></div><div class="t-lbl">01 — AI Services · Case Studies · New</div></div></div>
+  </div>
+  <div class="box"><strong class="k">Poppins 800</strong> for all headings and the wordmark. <strong class="k">DM Sans</strong> for body, labels, and UI copy — exceptionally legible at small sizes, clinical without being cold. Apply −0.03 to −0.04em tracking on display text. Never use a third typeface.</div>
+</section>
+
+<!-- 04 COMPONENTS -->
+<section id="components">
+  <div class="ey">04 — UI Components</div>
+  <h2>Design Elements</h2>
+
+  <div class="sh">Buttons</div>
+  <div class="comp-row">
+    <button class="btn-p">Find a Provider Near You</button>
+    <button class="btn-s">Learn How It Works</button>
+    <button class="btn-g">View Success Stories</button>
+  </div>
+
+  <div class="sh">Badges</div>
+  <div class="comp-row">
+    <span class="badge bgg">● Accepting Patients</span>
+    <span class="badge bgg">5× Revenue Growth</span>
+    <span class="badge bgb">NEW: AI Intake</span>
+    <span class="badge bgk">Toronto, ON</span>
+  </div>
+
+  <div class="sh">Card &amp; Form Input</div>
+  <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
+    <div class="card-ex">
+      <span class="badge bgg">● Active Client</span>
+      <div class="ce-t">Align Wellness Clinic</div>
+      <div class="ce-d">AI-powered patient acquisition and automated intake across three Toronto locations.</div>
+      <div class="ce-s">5×</div>
+      <div class="ce-sl">Revenue growth in 18 months</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;padding-top:4px">
+      <div class="iw"><div class="il">Clinic Name</div><input class="inp" type="text" placeholder="e.g. Align Wellness"/></div>
+      <div class="iw"><div class="il">Email Address</div><input class="inp" type="email" placeholder="you@clinic.com"/></div>
+      <button class="btn-p" style="align-self:flex-start">Get Free Audit →</button>
+    </div>
+  </div>
+
+  <!-- Dark mode preview -->
+  <div class="sh" style="margin-top:40px">Secondary — Operator &amp; Dashboard Context</div>
+  <div class="dark-preview">
+    <div class="wm" style="font-size:32px;margin-bottom:24px"><span style="color:#fff">Scale</span><span style="color:#00D46A">Health</span></div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px">
+      <button style="background:#00D46A;color:#0A0F1E;font-family:var(--fb);font-weight:700;font-size:13px;padding:11px 22px;border-radius:7px;border:none;cursor:pointer">Operator Dashboard</button>
+      <button style="background:transparent;color:#fff;font-family:var(--fb);font-weight:500;font-size:13px;padding:10px 22px;border-radius:7px;border:1px solid rgba(255,255,255,.15);cursor:pointer">View Reports</button>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#1C2340;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:16px">
+        <div style="font-size:10px;font-weight:700;color:#8A94AA;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">New Leads</div>
+        <div style="font-family:var(--fh);font-size:26px;font-weight:800;color:#00D46A;letter-spacing:-.03em">142</div>
+        <div style="font-size:11px;color:#8A94AA;margin-top:3px">↑ 24% this week</div>
+      </div>
+      <div style="background:#1C2340;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:16px">
+        <div style="font-size:10px;font-weight:700;color:#8A94AA;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Conversion</div>
+        <div style="font-family:var(--fh);font-size:26px;font-weight:800;color:#00D46A;letter-spacing:-.03em">37%</div>
+        <div style="font-size:11px;color:#8A94AA;margin-top:3px">↑ 8pts vs last month</div>
+      </div>
+      <div style="background:#1C2340;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:16px">
+        <div style="font-size:10px;font-weight:700;color:#8A94AA;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Revenue</div>
+        <div style="font-family:var(--fh);font-size:26px;font-weight:800;color:#00D46A;letter-spacing:-.03em">$124K</div>
+        <div style="font-size:11px;color:#8A94AA;margin-top:3px">Gross profit YTD</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 MOTION -->
+<section id="motion">
+  <div class="ey">05 — Motion</div>
+  <h2>Animation Principles</h2>
+  <div class="md2">
+    <div><div class="mdl">Pulse — Live indicators</div><div class="pdot"></div></div>
+    <div><div class="mdl">Breathe — Metric reveals</div><div class="br">+37% Conversions</div></div>
+    <div><div class="mdl">Float — Primary CTAs</div><div class="fl">Find Your Provider →</div></div>
+  </div>
+  <div class="box"><strong class="k">ease-out</strong> entrances · <strong class="k">ease-in-out</strong> loops · <strong class="k">150ms</strong> micro · <strong class="k">400–600ms</strong> transitions · <strong class="k">800ms–1.2s</strong> scroll reveals. Keep motion subtle on consumer-facing pages — patients need calm and trust, not excitement.</div>
+</section>
+
+<!-- 06 SPACING -->
+<section>
+  <div class="ey">06 — Spacing</div>
+  <h2>Spatial System</h2>
+  <p style="color:var(--muted);font-size:14px;font-weight:300">4px base unit — every spacing decision is a multiple of 4. Generous whitespace on consumer pages builds trust.</p>
+  <div class="sp-row">
+    <div class="sp-item"><div class="sp-block" style="height:4px"></div><div class="sp-lbl">4px<br>XS</div></div>
+    <div class="sp-item"><div class="sp-block" style="height:8px"></div><div class="sp-lbl">8px<br>SM</div></div>
+    <div class="sp-item"><div class="sp-block" style="height:16px"></div><div class="sp-lbl">16px<br>MD</div></div>
+    <div class="sp-item"><div class="sp-block" style="height:24px"></div><div class="sp-lbl">24px<br>LG</div></div>
+    <div class="sp-item"><div class="sp-block" style="height:32px"></div><div class="sp-lbl">32px<br>XL</div></div>
+    <div class="sp-item"><div class="sp-block" style="height:48px"></div><div class="sp-lbl">48px<br>2XL</div></div>
+    <div class="sp-item"><div class="sp-block" style="height:64px"></div><div class="sp-lbl">64px<br>3XL</div></div>
+    <div class="sp-item"><div class="sp-block" style="height:96px"></div><div class="sp-lbl">96px<br>4XL</div></div>
+  </div>
+</section>
+
+<!-- 07 VOICE -->
+<section id="voice">
+  <div class="ey">07 — Brand Voice</div>
+  <h2>Tone of Voice</h2>
+  <div class="pg">
+    <div class="pc"><div class="pi">🏥</div><div class="pt">Trusted, Not Clinical</div><div class="pd">Warm and credible — not cold and medical. Consumers need to feel safe. Operators need to feel confident. Both come from specificity and calm authority.</div></div>
+    <div class="pc"><div class="pi">🎯</div><div class="pt">Results-First</div><div class="pd">Lead with outcomes: $120K gross profit, 5× revenue, 37% conversion. Ground every claim in a real number. Vague promises lose both audiences.</div></div>
+    <div class="pc"><div class="pi">🤝</div><div class="pt">Partner Energy</div><div class="pd">"Done with and for you" — we only win when the provider wins and the patient finds the right care. Language of partnership, not vendor or gatekeeper.</div></div>
+  </div>
+  <div class="vg">
+    <div class="vc do">
+      <div class="vh">✓ Write Like This</div>
+      <div class="vi">Find the right clinic in your area — same-day appointments available.</div>
+      <div class="vi">Add $100K+ gross profit in year one. We've done it for clinics exactly like yours.</div>
+      <div class="vi">Our AI handles intake 24/7. Your team focuses on care.</div>
+      <div class="vi">37% higher conversions. Proven. Measurable. Repeatable.</div>
+    </div>
+    <div class="vc dt">
+      <div class="vh">✗ Avoid This</div>
+      <div class="vi">Leverage our AI-powered synergistic wellness ecosystem for optimal outcomes.</div>
+      <div class="vi">Revolutionizing the healthcare experience with cutting-edge technology.</div>
+      <div class="vi">We're passionate about connecting people with their best health journey!</div>
+      <div class="vi">Our holistic approach to patient acquisition drives transformative growth.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="fb2">Scale<span class="h">Health</span></div>
+    <p style="margin-top:5px">Brand Style Guide — v2.0 · Light-First · 2026</p>
+  </div>
+  <p>Poppins 800 + DM Sans · Forest #00A852 · Deep Ink #0A0F1E</p>
+</footer>
+
+</body>
+</html>
