@@ -44,9 +44,9 @@ const LandingPage: React.FC = () => {
                             >
                                 <button
                                     onClick={() => setIsOnboardingOpen(true)}
-                                    className="w-full sm:w-auto px-8 py-4 rounded-full font-bold bg-[#00D46A] text-[#0A0F1E] hover:bg-[#00A852] transition-colors flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(0,212,106,0.3)] hover:shadow-[0_0_30px_rgba(0,212,106,0.5)] transform hover:-translate-y-1 duration-300"
+                                    className="w-full sm:w-auto px-10 py-5 text-lg md:text-xl rounded-full font-black tracking-wide bg-[#00D46A] text-[#0A0F1E] hover:bg-[#00A852] transition-all flex items-center justify-center gap-3 shadow-[0_0_30px_rgba(0,212,106,0.4)] hover:shadow-[0_0_40px_rgba(0,212,106,0.6)] transform hover:-translate-y-1 duration-300"
                                 >
-                                    Onboard in 5 Minutes <ArrowRight size={18} />
+                                    Onboard in 5 Minutes <ArrowRight size={24} strokeWidth={3} />
                                 </button>
                                 <p className="text-gray-400 font-medium text-sm">No upfront costs. Cancel anytime.</p>
                             </motion.div>
