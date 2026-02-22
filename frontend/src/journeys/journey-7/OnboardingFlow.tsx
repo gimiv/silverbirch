@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronRight, CheckCircle2, Upload, User, MapPin, DollarSign, Activity, Award, Plus, Trash2 } from 'lucide-react';
+import { X, ChevronRight, CheckCircle2, Upload, User, MapPin, DollarSign, Activity, Award, Plus, Trash2, Mail, Phone, Building, MessageSquare } from 'lucide-react';
 
 interface OnboardingFlowProps {
     isOpen: boolean;
@@ -147,11 +147,49 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ isOpen, onClose }) => {
                                     </div>
                                 </div>
 
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label className="block text-sm font-bold text-gray-700 mb-2">Email Address</label>
+                                        <div className="relative">
+                                            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+                                            <input type="email" className="w-full pl-12 pr-4 py-3.5 rounded-xl border-2 border-gray-100 focus:border-[#00D46A] focus:ring-0 outline-none transition-colors font-medium text-gray-900" placeholder="jane@clinic.com" />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-bold text-gray-700 mb-2">Phone Number</label>
+                                        <div className="relative">
+                                            <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+                                            <input type="tel" className="w-full pl-12 pr-4 py-3.5 rounded-xl border-2 border-gray-100 focus:border-[#00D46A] focus:ring-0 outline-none transition-colors font-medium text-gray-900" placeholder="(555) 123-4567" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label className="block text-sm font-bold text-gray-700 mb-2">Clinic Name</label>
+                                        <div className="relative">
+                                            <Building className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+                                            <input type="text" className="w-full pl-12 pr-4 py-3.5 rounded-xl border-2 border-gray-100 focus:border-[#00D46A] focus:ring-0 outline-none transition-colors font-medium text-gray-900" placeholder="Peak Performance Therapy" />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-bold text-gray-700 mb-2">Contact Preference</label>
+                                        <div className="relative">
+                                            <MessageSquare className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+                                            <select className="w-full pl-12 pr-4 py-3.5 rounded-xl border-2 border-gray-100 focus:border-[#00D46A] focus:ring-0 outline-none transition-colors font-medium text-gray-900 bg-white appearance-none">
+                                                <option>Email</option>
+                                                <option>Phone Call</option>
+                                                <option>Text Message (SMS)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div>
-                                    <label className="block text-sm font-bold text-gray-700 mb-2">Clinic or Practice Name</label>
+                                    <label className="block text-sm font-bold text-gray-700 mb-2">Practice Address</label>
                                     <div className="relative">
                                         <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
-                                        <input type="text" className="w-full pl-12 pr-4 py-3.5 rounded-xl border-2 border-gray-100 focus:border-[#00D46A] focus:ring-0 outline-none transition-colors font-medium text-gray-900" placeholder="Peak Performance Therapy" />
+                                        <input type="text" className="w-full pl-12 pr-4 py-3.5 rounded-xl border-2 border-gray-100 focus:border-[#00D46A] focus:ring-0 outline-none transition-colors font-medium text-gray-900" placeholder="123 Wellness Way, Suite 100, City, State ZIP" />
                                     </div>
                                 </div>
                             </motion.div>
