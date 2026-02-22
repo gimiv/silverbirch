@@ -53,6 +53,14 @@ const PortalPage: React.FC = () => {
             path: '/w/journey-6',
             icon: <Activity className="text-brand-primary" size={24} />,
             status: 'New'
+        },
+        {
+            id: 'journey-7',
+            title: 'Client Journey 7: Clinic Onboarding',
+            description: 'B2B onboarding flow for therapists to become Preferred Partners.',
+            path: '/w/journey-7',
+            icon: <Layout className="text-brand-primary" size={24} />,
+            status: 'New'
         }
     ];
 

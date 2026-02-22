@@ -6,6 +6,7 @@ import IntegratedLandingPage from './journeys/integrated-offer/LandingPage';
 import ShopifyIntakePage from './journeys/scale-health/ShopifyIntakePage';
 import InsiderLandingPage from './journeys/insider/LandingPage';
 import Journey6LandingPage from './journeys/journey-6/LandingPage';
+import Journey7LandingPage from './journeys/journey-7/LandingPage';
 import { IntakeFlow } from './components/IntakeFlow';
 import PortalPage from './pages/PortalPage';
 import LoginPage from './pages/LoginPage';
@@ -35,6 +36,7 @@ const App: React.FC = () => {
         <Route path="/w/integrated-offer" element={<IntegratedLandingPage />} />
         <Route path="/w/insider" element={<InsiderLandingPage />} />
         <Route path="/w/journey-6" element={<Journey6LandingPage />} />
+        <Route path="/w/journey-7" element={<Journey7LandingPage />} />
         <Route path="/w/scale-health/landing" element={<LandingPage />} />
         <Route path="/scale-health" element={<LandingPage />} />
         <Route path="/w/intake" element={<IntakeFlow />} />
