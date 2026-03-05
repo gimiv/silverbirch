@@ -320,9 +320,34 @@ const LandingPage: React.FC = () => {
                     const chiroPromise = searchGooglePlaces(`Chiropractor in ${activeSearchQuery}`, center.lat, center.lng);
                     const [physioRes, chiroRes] = await Promise.all([physioPromise, chiroPromise]);
 
-                    // Merge and cap at ~20 additional partners so map doesn't lag
-                    const googlePartners = [...physioRes, ...chiroRes].slice(0, 20);
-                    mixedPartners = [...mixedPartners, ...googlePartners];
+                    const allGoogle = [...physioRes, ...chiroRes];
+                    // Sort by rating descending, then reviews descending to prioritize the best
+                    allGoogle.sort((a, b) => {
+                        if (b.rating !== a.rating) return b.rating - a.rating;
+                        return b.reviews - a.reviews;
+                    });
+
+                    const finalGoogle: ClinicData[] = [];
+                    let nearCount = 0;
+
+                    for (const g of allGoogle) {
+                        if (finalGoogle.length >= 20) break; // Global cap to prevent map lag
+
+                        const isNearPreferred = localPartners.some(p =>
+                            getDistanceFromLatLonInKm(g.lat, g.lng, p.lat, p.lng) < 25
+                        );
+
+                        if (isNearPreferred) {
+                            if (nearCount < 3) {
+                                finalGoogle.push(g);
+                                nearCount++;
+                            }
+                        } else {
+                            finalGoogle.push(g);
+                        }
+                    }
+
+                    mixedPartners = [...mixedPartners, ...finalGoogle];
                 }
 
                 // If the search returned 0 partners, fall back to showing all partners instead of an empty screen
