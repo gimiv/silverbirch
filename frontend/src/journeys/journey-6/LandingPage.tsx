@@ -7,6 +7,7 @@ import Map, { NavigationControl, Marker, useMap } from 'react-map-gl/mapbox';
 import type { MapRef } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import ScheduleModal from './ScheduleModal';
+import { PREFERRED_PARTNERS } from './data/preferredPartners';
 
 // We've moved from static PLACEHOLDER_IMAGES to dynamic randomuser.me fetching.
 // Mock Data for Hero Carousel
@@ -34,8 +35,6 @@ const HERO_THERAPISTS = [
     }
 ];
 
-const SPECIALTIES = ['Physiotherapy', 'Chiropractic', 'Massage Therapy', 'Naturopathy', 'Acupuncture'];
-
 interface ClinicData {
     id: string; // place_id
     name: string;
@@ -47,6 +46,8 @@ interface ClinicData {
     specialty: string;
     type: string;
     blurb: string;
+    website?: string;
+    address?: string;
 }
 
 interface MapboxSuggestion {
@@ -57,126 +58,31 @@ interface MapboxSuggestion {
 
 const TORONTO_CENTER = { lat: 43.6485, lng: -79.3921 };
 
-const CLINIC_ADJECTIVES = ['Elite', 'Premier', 'Apex', 'Pinnacle', 'Summit', 'Zenith', 'Nova', 'Vitality', 'Align', 'Core', 'Elevate', 'Lumina', 'Radiant', 'Synergy', 'Holistic', 'Integrative', 'Modern', 'Advanced', 'Dynamic'];
-const CLINIC_NOUNS = ['Health', 'Clinic', 'Center', 'Studio', 'Institute', 'Therapeutics', 'Therapy', 'Care', 'Recovery', 'Performance', 'Movement', 'Rehab', 'Wellness', 'Collective'];
+// Calculate distance in kilometers between two lat/lng points using Haversine formula
+const getDistanceFromLatLonInKm = (lat1: number, lon1: number, lat2: number, lon2: number) => {
+    const R = 6371; // Radius of the earth in km
+    const dLat = (lat2 - lat1) * (Math.PI / 180);
+    const dLon = (lon2 - lon1) * (Math.PI / 180);
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+};
 
-const searchMapboxGeocoding = async (query: string, mapboxToken: string): Promise<ClinicData[]> => {
-    if (!query || !mapboxToken) return [];
-
-    // Hit the Mapbox Geocoding API to find the center of the city/area queried
-    const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(query)}.json`;
-    const params = new URLSearchParams({
-        access_token: mapboxToken,
-        types: 'place,locality,neighborhood,postcode',
-        limit: '1' // We only need the top result to get the center
-    });
-
+const searchMapboxCenter = async (query: string, mapboxToken: string): Promise<{ lat: number, lng: number } | null> => {
+    if (!query || !mapboxToken) return null;
     try {
+        const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(query)}.json`;
+        const params = new URLSearchParams({ access_token: mapboxToken, types: 'place,locality,neighborhood,postcode', limit: '1' });
         const res = await fetch(`${endpoint}?${params.toString()}`);
-        if (!res.ok) throw new Error('Geocoding failed');
+        if (!res.ok) return null;
         const data = await res.json();
-
-        if (!data.features || data.features.length === 0) return [];
-
-        const centerLng = data.features[0].center[0];
-        const centerLat = data.features[0].center[1];
-        const placeName = data.features[0].text; // Get the raw city name like "Toronto"
-
-        // Secondary Query: Get actual POIs (buildings) near the center so markers stay on land!
-        const poiParams = new URLSearchParams({
-            access_token: mapboxToken,
-            types: 'poi',
-            proximity: `${centerLng},${centerLat}`,
-            limit: '15'
-        });
-
-        let poiFeatures: any[] = [];
-        try {
-            const poiRes = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/clinic.json?${poiParams.toString()}`);
-            if (poiRes.ok) {
-                const poiData = await poiRes.json();
-                poiFeatures = poiData.features || [];
-            }
-        } catch (e) {
-            console.error(e);
-        }
-
-        const usedImageIds = new Set<number>();
-
-        // Generate mock clinics tightly clustered around the geocoded center
-        return Array.from({ length: 15 }).map((_, index) => {
-            const specialty = SPECIALTIES[Math.floor(Math.random() * SPECIALTIES.length)];
-            const type = index < 5 ? 'Preferred Partner' : 'Network Partner';
-            const blurb = "Professional clinic providing top-tier patient care and personalized treatment plans in a modern facility.";
-
-            // Dynamic Clinic Naming - Intermix City Name
-            const adj = CLINIC_ADJECTIVES[Math.floor(Math.random() * CLINIC_ADJECTIVES.length)];
-            const noun = CLINIC_NOUNS[Math.floor(Math.random() * CLINIC_NOUNS.length)];
-
-            // 50% chance to lead with city name vs adjective
-            const clinicName = Math.random() > 0.5
-                ? `${placeName} ${specialty} ${noun}`
-                : `${adj} ${specialty} ${noun} of ${placeName}`;
-
-            // Pull unique headshot
-            const gender = Math.random() > 0.5 ? 'women' : 'men';
-            let imageId = Math.floor(Math.random() * 99);
-            while (usedImageIds.has(imageId)) {
-                imageId = Math.floor(Math.random() * 99);
-            }
-            usedImageIds.add(imageId);
-
-            const image = `https://randomuser.me/api/portraits/${gender}/${imageId}.jpg`;
-
-            // Geometry assignment: Try to use a real building POI! 
-            let finalLat = centerLat;
-            let finalLng = centerLng;
-
-            if (poiFeatures.length > 0) {
-                // Safely grab a POI. If we don't have enough, wrap around and add micro-jitter
-                const featureIndex = index % poiFeatures.length;
-                const feature = poiFeatures[featureIndex];
-
-                finalLng = feature.center[0];
-                finalLat = feature.center[1];
-
-                // If we wrapped around, add a micro-jitter (e.g. 50 meters) so they don't perfectly overlap
-                if (index >= poiFeatures.length) {
-                    finalLng += (Math.random() - 0.5) * 0.001;
-                    finalLat += (Math.random() - 0.5) * 0.001;
-                }
-            } else {
-                // Fallback to purely math radius (spread markers out across a ~3-5km radius) if API fails
-                finalLat += (Math.random() - 0.5) * 0.04;
-                finalLng += (Math.random() - 0.5) * 0.04;
-            }
-
-            // Toronto Waterfront Rescue: 
-            // If the math jitter pushed them south of the shoreline (Lake Ontario), bump them North!
-            if (finalLat < 43.641 && finalLng > -79.50 && finalLng < -79.30) {
-                finalLat += 0.03 + (Math.random() * 0.02); // safely push back onto mainland downtown
-            }
-
-            // Round rating to 1 decimal place
-            const rawRating = 4.8 + (Math.random() * 0.2);
-            const rating = Number(rawRating.toFixed(1));
-
-            return {
-                id: `clinic-${index}-${Date.now()}`,
-                name: clinicName,
-                lat: finalLat,
-                lng: finalLng,
-                rating,
-                reviews: Math.floor(Math.random() * 100) + 10,
-                image,
-                specialty,
-                type,
-                blurb
-            };
-        });
-    } catch (error) {
-        console.error("Mapbox Search Error:", error);
-        return [];
+        if (!data.features || data.features.length === 0) return null;
+        return { lng: data.features[0].center[0], lat: data.features[0].center[1] };
+    } catch {
+        return null;
     }
 };
 
@@ -265,7 +171,7 @@ const LandingPage: React.FC = () => {
     // Determine the Mapbox API key dynamically from Vite env
     const mapboxToken = import.meta.env.VITE_MAPBOX_API_KEY || '';
 
-    const [clinics, setClinics] = useState<ClinicData[]>([]);
+    const [clinics, setClinics] = useState<ClinicData[]>(PREFERRED_PARTNERS);
     const [selectedPartnerId, setSelectedPartnerId] = useState<string | null>(null);
     const [locationInput, setLocationInput] = useState('');
     const [activeSearchQuery, setActiveSearchQuery] = useState('Toronto'); // Default search
@@ -309,27 +215,41 @@ const LandingPage: React.FC = () => {
     useEffect(() => {
         const fetchClinics = async () => {
             setIsSearching(true);
-            const results = await searchMapboxGeocoding(activeSearchQuery, mapboxToken);
-            setClinics(results);
-            setIsSearching(false);
+            const center = await searchMapboxCenter(activeSearchQuery, mapboxToken);
 
-            // Fit bounds to new results if available
-            if (results.length > 0 && mapRef.current) {
-                const lats = results.map(r => r.lat);
-                const lngs = results.map(r => r.lng);
-
-                // Add tight padding and cap max zoom to keep it looking dense
-                mapRef.current.fitBounds(
-                    [
-                        [Math.min(...lngs) - 0.01, Math.min(...lats) - 0.01], // Southwestern corner
-                        [Math.max(...lngs) + 0.01, Math.max(...lats) + 0.01]  // Northeastern corner
-                    ],
-                    { padding: { top: 40, bottom: 40, left: 40, right: 40 }, duration: 1500, maxZoom: 14 }
+            if (center) {
+                // Filter PREFERRED_PARTNERS linearly: keep all under 50km
+                const localPartners = PREFERRED_PARTNERS.filter(p =>
+                    getDistanceFromLatLonInKm(center.lat, center.lng, p.lat, p.lng) < 50
                 );
+
+                // If the search returned 0 partners, fall back to showing all partners instead of an empty screen
+                setClinics(localPartners.length > 0 ? localPartners : PREFERRED_PARTNERS);
+
+                if (mapRef.current) {
+                    const viewClinics = localPartners.length > 0 ? localPartners : PREFERRED_PARTNERS;
+                    // Fly to bounds
+                    const lats = viewClinics.map(r => r.lat);
+                    const lngs = viewClinics.map(r => r.lng);
+                    mapRef.current.fitBounds(
+                        [
+                            [Math.min(...lngs) - 0.05, Math.min(...lats) - 0.05],
+                            [Math.max(...lngs) + 0.05, Math.max(...lats) + 0.05]
+                        ],
+                        { padding: { top: 40, bottom: 40, left: 40, right: 40 }, duration: 1500, maxZoom: 13 }
+                    );
+                }
+            } else {
+                setClinics(PREFERRED_PARTNERS);
+                if (mapRef.current) {
+                    mapRef.current.flyTo({ center: [TORONTO_CENTER.lng, TORONTO_CENTER.lat], zoom: 11 });
+                }
             }
+            setIsSearching(false);
         };
 
         if (activeSearchQuery) fetchClinics();
+        else setClinics(PREFERRED_PARTNERS);
     }, [activeSearchQuery, mapboxToken]);
 
     const handleSearch = () => {
@@ -695,6 +615,9 @@ const LandingPage: React.FC = () => {
                                                                 </span>
                                                             )}
                                                         </div>
+                                                        {partner.address && (
+                                                            <p className="text-gray-500 text-xs mb-1 mb-2">{partner.address}</p>
+                                                        )}
                                                         <div className="flex items-center gap-3 mb-2">
                                                             <p className="text-[#00A852] font-bold text-xs uppercase tracking-wider">{partner.specialty}</p>
                                                             <div className="flex items-center gap-1 bg-yellow-50 px-1.5 py-0.5 rounded text-xs font-bold text-yellow-700">
