@@ -316,8 +316,8 @@ const LandingPage: React.FC = () => {
 
                 // Fetch high-rated local partners from Google Places if ready
                 if (isGoogleReady) {
-                    const physioPromise = searchGooglePlaces(`Physiotherapist in ${activeSearchQuery}`, center.lat, center.lng);
-                    const chiroPromise = searchGooglePlaces(`Chiropractor in ${activeSearchQuery}`, center.lat, center.lng);
+                    const physioPromise = searchGooglePlaces(`Physiotherapist`, center.lat, center.lng);
+                    const chiroPromise = searchGooglePlaces(`Chiropractor`, center.lat, center.lng);
                     const [physioRes, chiroRes] = await Promise.all([physioPromise, chiroPromise]);
 
                     const allGoogle = [...physioRes, ...chiroRes];
@@ -331,7 +331,7 @@ const LandingPage: React.FC = () => {
                     let nearCount = 0;
 
                     for (const g of allGoogle) {
-                        if (finalGoogle.length >= 20) break; // Global cap to prevent map lag
+                        if (finalGoogle.length >= 60) break; // Expanded global cap to allow outer cities to populate
 
                         const isNearPreferred = localPartners.some(p =>
                             getDistanceFromLatLonInKm(g.lat, g.lng, p.lat, p.lng) < 25
