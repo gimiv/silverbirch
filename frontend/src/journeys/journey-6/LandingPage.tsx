@@ -58,6 +58,13 @@ interface MapboxSuggestion {
 
 const TORONTO_CENTER = { lat: 43.6485, lng: -79.3921 };
 
+// Polyfill for Google Types
+declare global {
+    interface Window {
+        google: any;
+    }
+}
+
 // Calculate distance in kilometers between two lat/lng points using Haversine formula
 const getDistanceFromLatLonInKm = (lat1: number, lon1: number, lat2: number, lon2: number) => {
     const R = 6371; // Radius of the earth in km
@@ -106,6 +113,70 @@ const fetchMapboxSuggestions = async (query: string, token: string): Promise<Map
     } catch {
         return [];
     }
+};
+
+const searchGooglePlaces = (
+    query: string,
+    centerLat: number,
+    centerLng: number
+): Promise<ClinicData[]> => {
+    return new Promise((resolve) => {
+        if (!window.google || !window.google.maps || !window.google.maps.places) {
+            return resolve([]);
+        }
+
+        const hiddenMapDiv = document.createElement('div');
+        const service = new window.google.maps.places.PlacesService(hiddenMapDiv);
+
+        const location = new window.google.maps.LatLng(centerLat, centerLng);
+
+        // Fetch Physiotherapist vs Chiropractor logic
+        const request = {
+            query: `${query}`,
+            location: location,
+            radius: 50000 // 50km
+        };
+
+        service.textSearch(request, (results: any, status: any) => {
+            if (status === window.google.maps.places.PlacesServiceStatus.OK && results) {
+                // Filter rating >= 4.5
+                const highRated = results.filter((p: any) => p.rating && p.rating >= 4.5);
+
+                const mapped: ClinicData[] = highRated.map((p: any, i: number) => {
+                    // Try to extract a photo, otherwise use random placeholder
+                    let image = `https://randomuser.me/api/portraits/lego/${(i % 9) + 1}.jpg`;
+                    if (p.photos && p.photos.length > 0) {
+                        try {
+                            image = p.photos[0].getUrl({ maxWidth: 400 });
+                        } catch (e) { }
+                    }
+
+                    // Guess specialty from query or types
+                    let specialty = "Wellness Partner";
+                    if (query.toLowerCase().includes("physio")) specialty = "Physiotherapy";
+                    if (query.toLowerCase().includes("chiro")) specialty = "Chiropractic";
+
+                    return {
+                        id: `google-${p.place_id}`,
+                        name: p.name,
+                        lat: p.geometry.location.lat(),
+                        lng: p.geometry.location.lng(),
+                        rating: p.rating,
+                        reviews: p.user_ratings_total || 0,
+                        image: image,
+                        specialty: specialty,
+                        type: "Network Partner",
+                        blurb: "Highly rated local practitioner from Google Places.",
+                        address: p.formatted_address
+                    }
+                });
+
+                resolve(mapped);
+            } else {
+                resolve([]);
+            }
+        });
+    });
 };
 
 const CustomMapboxMarker = ({ isSelected, isPreferred }: { isSelected: boolean, isPreferred: boolean }) => {
@@ -171,12 +242,30 @@ const LandingPage: React.FC = () => {
     // Determine the Mapbox API key dynamically from Vite env
     const mapboxToken = import.meta.env.VITE_MAPBOX_API_KEY || '';
 
-    const [clinics, setClinics] = useState<ClinicData[]>(PREFERRED_PARTNERS);
+    const [clinics, setClinics] = useState<ClinicData[]>(PREFERRED_PARTNERS as ClinicData[]);
     const [selectedPartnerId, setSelectedPartnerId] = useState<string | null>(null);
     const [locationInput, setLocationInput] = useState('');
     const [activeSearchQuery, setActiveSearchQuery] = useState('Toronto'); // Default search
     const [activeFilter, setActiveFilter] = useState('All');
     const [isSearching, setIsSearching] = useState(false);
+    const [isGoogleReady, setIsGoogleReady] = useState(false);
+
+    // Inject Google Places Script
+    useEffect(() => {
+        const existingScript = document.getElementById('google-maps-script');
+        if (existingScript) {
+            if (window.google) setIsGoogleReady(true);
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.id = 'google-maps-script';
+        const googleKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || '';
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${googleKey}&libraries=places`;
+        script.async = true;
+        script.onload = () => setIsGoogleReady(true);
+        document.head.appendChild(script);
+    }, []);
 
     // Scheduling Modal States
     const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
@@ -219,15 +308,28 @@ const LandingPage: React.FC = () => {
 
             if (center) {
                 // Filter PREFERRED_PARTNERS linearly: keep all under 50km
-                const localPartners = PREFERRED_PARTNERS.filter(p =>
+                const localPartners = (PREFERRED_PARTNERS as ClinicData[]).filter(p =>
                     getDistanceFromLatLonInKm(center.lat, center.lng, p.lat, p.lng) < 50
                 );
 
+                let mixedPartners = [...localPartners];
+
+                // Fetch high-rated local partners from Google Places if ready
+                if (isGoogleReady) {
+                    const physioPromise = searchGooglePlaces(`Physiotherapist in ${activeSearchQuery}`, center.lat, center.lng);
+                    const chiroPromise = searchGooglePlaces(`Chiropractor in ${activeSearchQuery}`, center.lat, center.lng);
+                    const [physioRes, chiroRes] = await Promise.all([physioPromise, chiroPromise]);
+
+                    // Merge and cap at ~20 additional partners so map doesn't lag
+                    const googlePartners = [...physioRes, ...chiroRes].slice(0, 20);
+                    mixedPartners = [...mixedPartners, ...googlePartners];
+                }
+
                 // If the search returned 0 partners, fall back to showing all partners instead of an empty screen
-                setClinics(localPartners.length > 0 ? localPartners : PREFERRED_PARTNERS);
+                setClinics(mixedPartners.length > 0 ? mixedPartners : (PREFERRED_PARTNERS as ClinicData[]));
 
                 if (mapRef.current) {
-                    const viewClinics = localPartners.length > 0 ? localPartners : PREFERRED_PARTNERS;
+                    const viewClinics = mixedPartners.length > 0 ? mixedPartners : (PREFERRED_PARTNERS as ClinicData[]);
                     // Fly to bounds
                     const lats = viewClinics.map(r => r.lat);
                     const lngs = viewClinics.map(r => r.lng);
@@ -240,7 +342,7 @@ const LandingPage: React.FC = () => {
                     );
                 }
             } else {
-                setClinics(PREFERRED_PARTNERS);
+                setClinics(PREFERRED_PARTNERS as ClinicData[]);
                 if (mapRef.current) {
                     mapRef.current.flyTo({ center: [TORONTO_CENTER.lng, TORONTO_CENTER.lat], zoom: 11 });
                 }
@@ -249,8 +351,8 @@ const LandingPage: React.FC = () => {
         };
 
         if (activeSearchQuery) fetchClinics();
-        else setClinics(PREFERRED_PARTNERS);
-    }, [activeSearchQuery, mapboxToken]);
+        else setClinics(PREFERRED_PARTNERS as ClinicData[]);
+    }, [activeSearchQuery, mapboxToken, isGoogleReady]);
 
     const handleSearch = () => {
         if (locationInput.trim()) {
